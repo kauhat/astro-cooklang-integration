@@ -30,11 +30,14 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "devDependencies": {
+  "dependencies": {
     "@cooklang/cooklang-ts": "^1.2.3",
+    "vite-plugin-cooklang": "^0.1.1"
+  },
+  "devDependencies": {
     "astro": "^2.1.0",
     "gray-matter": "^4.0.3",
-    "vite-plugin-cooklang": "^0.1.1",
+    "vite": "^4.0.3",
     "unbuild": "^1.1.1",
     "zod": "^3.17.3"
   },

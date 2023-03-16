@@ -15,9 +15,9 @@
 		"serve": "cd demo; astro preview",
 		"release": "npm --workspaces publish --access public"
 	},
-    "devDependencies": {
-        "unbuild": "^1.1.1"
-    },
+	"devDependencies": {
+		"unbuild": "^1.1.2"
+	},
 	"peerDependencies": {
 		"astro": "^2.1.0"
 	}
