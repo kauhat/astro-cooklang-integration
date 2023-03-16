@@ -1,0 +1,44 @@
+{
+  "name": "astro-cooklang",
+  "description": "Use Cooklang recipes within Astro",
+  "version": "0.0.1",
+  "author": "Jack Fletcher",
+  "license": "MIT",
+  "keywords": [
+    "astro-integration",
+    "astro-component",
+    "cooklang"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "unbuild",
+    "build": "unbuild",
+    "dev": "vitest dev",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@cooklang/cooklang-ts": "^1.2.3",
+    "astro": "^2.1.0",
+    "gray-matter": "^4.0.3",
+    "vite-plugin-cooklang": "^0.1.1",
+    "unbuild": "^1.1.1",
+    "zod": "^3.17.3"
+  },
+  "peerDependencies": {
+    "astro": "^2.1.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "astro-cooklang.demo",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"start": "astro dev",
+		"build": "astro build",
+		"serve": "astro preview",
+		"astro": "astro"
+	},
+	"devDependencies": {
+		"astro-cooklang": "latest",
+		"astro": "latest"
+	}
+}
