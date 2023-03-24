@@ -7,13 +7,13 @@
 		"packages/*"
 	],
 	"scripts": {
-		"bump:patch": "npm --workspaces --git-tag-version false version patch && npm --git-tag-version false version patch",
-		"bump:minor": "npm --workspaces --git-tag-version false version minor && npm --git-tag-version false version minor",
-		"bump:major": "npm --workspaces --git-tag-version false version major && npm --git-tag-version false version major",
+		"bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
+		"bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
+		"bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
 		"start": "cd demo; astro dev",
 		"build": "cd demo; astro build",
 		"serve": "cd demo; astro preview",
-		"release": "npm --workspaces publish --access public"
+		"release": "pnpm publish --access public"
 	},
 	"devDependencies": {
 		"unbuild": "^1.1.2"
