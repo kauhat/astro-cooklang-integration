@@ -1,0 +1,8 @@
+**/dist
+**/node_modules
+
+# Directories
+.vscode
+
+# Files
+pnpm-lock.yaml
