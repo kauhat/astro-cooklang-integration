@@ -3,7 +3,12 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
 const recipes = await getCollection("recipes");
+const categories = [...new Set(
+    recipes.map((entry) => { entry.data?.category })
+)]
+
 ---
 
 <Layout>
+    { JSON.stringify(categories) }
 </Layout>
