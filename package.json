@@ -1,24 +1,21 @@
 {
-	"name": "astro-cooklang.root",
-	"private": true,
-	"type": "module",
-	"workspaces": [
-		"demo",
-		"packages/*"
-	],
-	"scripts": {
-		"bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-		"bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-		"bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-		"start": "cd demo; astro dev",
-		"build": "cd demo; astro build",
-		"serve": "cd demo; astro preview",
-		"release": "pnpm publish --access public"
-	},
-	"devDependencies": {
-		"unbuild": "^1.1.2"
-	},
-	"peerDependencies": {
-		"astro": "^2.1.0"
-	}
+  "name": "astro-cooklang.root",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "demo",
+    "packages/*"
+  ],
+  "scripts": {
+    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
+    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
+    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
+    "start": "cd demo; astro dev",
+    "build": "cd demo; astro build",
+    "serve": "cd demo; astro preview",
+    "release": "pnpm publish --access public"
+  },
+  "devDependencies": {
+	  "astro": "latest"
+  }
 }

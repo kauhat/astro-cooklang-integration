@@ -3,14 +3,14 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-    const recipes = await getCollection("recipes");
+  const recipes = await getCollection("recipes");
 
-    return recipes.map((recipe) => {
-        return {
-            params: { recipe: recipe.slug },
-            props: { recipe },
-        };
-    });
+  return recipes.map((recipe) => {
+    return {
+      params: { recipe: recipe.slug },
+      props: { recipe },
+    };
+  });
 }
 
 const { recipe } = Astro.props;
@@ -19,11 +19,11 @@ const title = recipe.data?.metadata?.title || recipe.slug;
 ---
 
 <Layout title={title}>
-    <div class="sticky top-0 p-4 bg-inherit shadow bg-gray-100">
-        <h1 class="text-3xl font-semibold">{title}</h1>
-    </div>
+  <div class="sticky top-0 p-4 bg-inherit shadow bg-gray-100">
+    <h1 class="text-3xl font-semibold">{title}</h1>
+  </div>
 
-    <div class="p-4">
-        {JSON.stringify(recipe)}
-    </div>
+  <div class="p-4">
+    {JSON.stringify(recipe)}
+  </div>
 </Layout>
