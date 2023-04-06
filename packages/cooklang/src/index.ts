@@ -1,7 +1,18 @@
-import type { AstroIntegration, AstroConfig } from "astro";
+import type {
+  AstroConfig,
+  AstroIntegration,
+  ContentEntryType,
+  HookParameters,
+} from "astro";
 import type { InlineConfig } from "vite";
 import cooklangVite from "vite-plugin-cooklang";
 import { Recipe } from "@cooklang/cooklang-ts";
+
+type SetupHookParams = HookParameters<"astro:config:setup"> & {
+  // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
+  // "`contentEntryType` is not a public API"
+  addContentEntryType: (contentEntryType: ContentEntryType) => void;
+};
 
 // TODO: Use template to render default content display.
 type ContentTemplate = void;
@@ -25,12 +36,13 @@ export default function cooklangIntegration(
   return {
     name: "@astrojs/cooklang",
     hooks: {
-      "astro:config:setup": async ({
-        updateConfig,
-        config,
-        addContentEntryType,
-        addPageExtension,
-      }: any) => {
+      "astro:config:setup": async (params) => {
+        const { updateConfig, config, addContentEntryType } =
+          params as SetupHookParams;
+
+        /**
+         *
+         */
         function getEntryInfo({
           fileUrl,
           contents,
@@ -52,12 +64,16 @@ export default function cooklangIntegration(
           entryBodyByFileIdCache.set(fileUrl.pathname, body);
 
           return {
-            data: { ingredients, cookwares, metadata, steps, shoppingList },
+            data: {
+              ingredients,
+              cookwares,
+              metadata,
+              steps,
+              shoppingList,
+            },
             body,
             slug: metadata.slug,
-            rawData: {
-              recipe,
-            },
+            rawData: "",
           };
         }
 
@@ -73,15 +89,13 @@ export default function cooklangIntegration(
           // ),
         });
 
-        addPageExtension(".cook");
-
         // Using my vite plugin for now, but we probably want a custom
         // transformer so we can use `entryBodyByFileIdCache.get()`.
         const viteConfig: InlineConfig = {
           plugins: [cooklangVite()],
         };
 
-        updateConfig({ vite: viteConfig });
+        // updateConfig({ vite: viteConfig });
       },
     },
   };
