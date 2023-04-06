@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { recipe } = Astro.props;
+const { Content } = await recipe.render();
 
 const title = recipe.data?.metadata?.title || recipe.slug;
 ---
@@ -23,7 +24,11 @@ const title = recipe.data?.metadata?.title || recipe.slug;
     <h1 class="text-3xl font-semibold">{title}</h1>
   </div>
 
-  <div class="p-4">
+  <div class="whitespace-pre-wrap font-mono">
     {JSON.stringify(recipe)}
+  </div>
+
+  <div class="p-4 prose">
+    <Content />
   </div>
 </Layout>
