@@ -42,6 +42,6 @@
     "zod": "^3.21.4"
   },
   "peerDependencies": {
-    "astro": "^2.1.0"
+    "astro": "^2.2.0"
   }
 }
