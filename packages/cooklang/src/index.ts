@@ -7,11 +7,19 @@ import { Recipe } from "@cooklang/cooklang-ts";
 type ContentTemplate = void;
 
 export interface AstroCooklangConfig {
-  contentTemplate: ContentTemplate;
+  contentTemplate?: ContentTemplate;
 }
 
-export default function cooklang(
-  inputConfig: AstroCooklangConfig
+const contentTypesTemplate = `declare module 'astro:content' {
+	interface Render {
+		'.cook': Promise<{
+			Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+		}>;
+	}
+}`;
+
+export default function cooklangIntegration(
+  inputConfig: AstroCooklangConfig = {}
 ): AstroIntegration {
   const entryBodyByFileIdCache = new Map<string, string>();
   return {
@@ -53,18 +61,17 @@ export default function cooklang(
           };
         }
 
-        const contentEntryType = {
+        addContentEntryType({
           extensions: [".cook"],
           getEntryInfo,
+          contentModuleTypes: contentTypesTemplate,
 
           // I don't think we need this yet...
           // contentModuleTypes: await fs.promises.readFile(
           // 	new URL('../template/content-module-types.d.ts', import.meta.url),
           // 	'utf-8'
           // ),
-        };
-
-        addContentEntryType(contentEntryType);
+        });
 
         addPageExtension(".cook");
 

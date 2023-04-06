@@ -3,6 +3,7 @@
 
 # Directories
 .vscode
+.astro
 
 # Files
 pnpm-lock.yaml
