@@ -4,11 +4,14 @@ import Layout from "../layouts/Layout.astro";
 
 const recipes = await getCollection("recipes");
 const categories = [...new Set(
-    recipes.map((entry) => { entry.data?.category })
+    recipes.map((entry) => {console.log(entry); return entry}).map((entry) => entry.data?.category)
 )]
 
+const tags = [...new Set(
+    recipes.flatMap((entry) => entry.data?.tags)
+)]
 ---
 
 <Layout>
-    { JSON.stringify(categories) }
+    { JSON.stringify({categories, tags}, null, 2) }
 </Layout>

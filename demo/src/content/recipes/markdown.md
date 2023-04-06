@@ -1,7 +1,7 @@
 ---
 title: Markdown
-category: my-custom-slug/supports/slashes
-tags: [Test]
+category: Debug
+tags: [TestTag, Demo]
 ---
 
 # A Markdown recipe
