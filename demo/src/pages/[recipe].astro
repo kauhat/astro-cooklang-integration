@@ -25,7 +25,7 @@ const title = recipe.data?.metadata?.title || recipe.slug;
   </div>
 
   <div class="whitespace-pre-wrap font-mono">
-    {JSON.stringify(recipe)}
+    {JSON.stringify({recipe}, null, 4)}
   </div>
 
   <div class="p-4 prose">
