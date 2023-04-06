@@ -13,9 +13,11 @@
     "start": "cd demo; astro dev",
     "build": "cd demo; astro build",
     "serve": "cd demo; astro preview",
-    "release": "pnpm publish --access public"
+    "release": "pnpm publish --access public",
+    "pretty": "prettier -w ./"
   },
   "devDependencies": {
-	  "astro": "latest"
+    "astro": "^2.2.0",
+    "prettier": "^2.8.7"
   }
 }
