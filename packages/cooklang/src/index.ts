@@ -12,6 +12,7 @@ type SetupHookParams = HookParameters<"astro:config:setup"> & {
   // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
   // "`contentEntryType` is not a public API"
   addContentEntryType: (contentEntryType: ContentEntryType) => void;
+  addPageExtension: (extension: string) => void;
 };
 
 // TODO: Use template to render default content display.
@@ -21,23 +22,23 @@ export interface AstroCooklangConfig {
   contentTemplate?: ContentTemplate;
 }
 
-const contentTypesTemplate = `declare module 'astro:content' {
-	interface Render {
-		'.cook': Promise<{
-			Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
-		}>;
-	}
+const contentTypesTemplate = `
+declare module 'astro:content' {
+  interface Render {
+    '.cook': Promise<{
+      Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+    }>;
+  }
 }`;
 
 export default function cooklangIntegration(
   inputConfig: AstroCooklangConfig = {}
 ): AstroIntegration {
-  const entryBodyByFileIdCache = new Map<string, string>();
   return {
     name: "@astrojs/cooklang",
     hooks: {
       "astro:config:setup": async (params) => {
-        const { updateConfig, config, addContentEntryType } =
+        const { updateConfig, addContentEntryType, addPageExtension } =
           params as SetupHookParams;
 
         /**
@@ -61,8 +62,6 @@ export default function cooklangIntegration(
           // We'll just use the raw file contents for now.
           const body = contents;
 
-          entryBodyByFileIdCache.set(fileUrl.pathname, body);
-
           return {
             data: {
               ingredients,
@@ -77,25 +76,38 @@ export default function cooklangIntegration(
           };
         }
 
+        /**
+         *
+         */
+        async function getRenderModule({ entry, viteId }) {
+          await Promise.resolve();
+
+          return {
+            code: `
+export async function Content (props) {
+  return {JSON.stringify({entry.body}, null, 4)}
+}`,
+          };
+        }
+
+        // TODO: Try disabling.
+        addPageExtension(".cook");
+
         addContentEntryType({
           extensions: [".cook"],
           getEntryInfo,
+          // TODO...
+          // getRenderModule,
           contentModuleTypes: contentTypesTemplate,
-
-          // I don't think we need this yet...
-          // contentModuleTypes: await fs.promises.readFile(
-          // 	new URL('../template/content-module-types.d.ts', import.meta.url),
-          // 	'utf-8'
-          // ),
         });
 
         // Using my vite plugin for now, but we probably want a custom
-        // transformer so we can use `entryBodyByFileIdCache.get()`.
+        // transformer later.
         const viteConfig: InlineConfig = {
           plugins: [cooklangVite()],
         };
 
-        // updateConfig({ vite: viteConfig });
+        updateConfig({ vite: viteConfig });
       },
     },
   };
