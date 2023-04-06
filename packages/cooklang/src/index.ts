@@ -3,7 +3,14 @@ import type { InlineConfig } from 'vite';
 import cooklangVite from 'vite-plugin-cooklang';
 import { Recipe } from '@cooklang/cooklang-ts';
 
-export default function cooklang(cooklangConfig = {}): AstroIntegration {
+// TODO: Use template to render default content display.
+type ContentTemplate = void;
+
+export interface AstroCooklangConfig {
+	contentTemplate: ContentTemplate
+}
+
+export default function cooklang(inputConfig: AstroCooklangConfig): AstroIntegration {
 	const entryBodyByFileIdCache = new Map<string, string>();
 	return {
 		name: '@astrojs/cooklang',
