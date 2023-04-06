@@ -10,7 +10,7 @@
     "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
     "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
     "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-    "start": "cd demo; astro dev",
+    "start": "pnpm -C ./packages/cooklang run build; pnpm -C ./demo run start",
     "build": "cd demo; astro build",
     "serve": "cd demo; astro preview",
     "release": "pnpm publish --access public",
