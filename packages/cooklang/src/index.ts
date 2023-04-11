@@ -3,6 +3,7 @@ import type {
   AstroIntegration,
   ContentEntryType,
   HookParameters,
+  ContentEntryModule,
 } from "astro";
 import type { InlineConfig } from "vite";
 import cooklangVite from "vite-plugin-cooklang";
@@ -79,13 +80,23 @@ export default function cooklangIntegration(
         /**
          *
          */
-        async function getRenderModule({ entry, viteId }) {
-          await Promise.resolve();
+        async function getRenderModule({
+          viteId,
+          entry,
+        }: {
+          entry: ContentEntryModule;
+          viteId: string;
+        }) {
+          console.log({ viteId, entry });
 
           return {
             code: `
+const recipeSource = ${JSON.stringify(entry.body, null, 4)}
+
+console.log({recipeSource})
+
 export async function Content (props) {
-  return {JSON.stringify({entry.body}, null, 4)}
+  return recipeSource
 }`,
           };
         }
@@ -97,7 +108,7 @@ export async function Content (props) {
           extensions: [".cook"],
           getEntryInfo,
           // TODO...
-          // getRenderModule,
+          getRenderModule,
           contentModuleTypes: contentTypesTemplate,
         });
 
