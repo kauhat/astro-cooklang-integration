@@ -17,7 +17,7 @@
     "pretty": "prettier -w ./"
   },
   "devDependencies": {
-    "astro": "^2.2.1",
+    "astro": "^2.3.0",
     "prettier": "^2.8.7"
   }
 }
