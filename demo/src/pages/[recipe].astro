@@ -20,15 +20,15 @@ const title = recipe.data?.metadata?.title || recipe.slug;
 ---
 
 <Layout title={title}>
-  <div class="sticky top-0 p-4 bg-inherit shadow bg-gray-100">
+  <div class="sticky top-0 bg-gray-100 bg-inherit p-4 shadow">
     <h1 class="text-3xl font-semibold">{title}</h1>
   </div>
 
-  <div class="whitespace-pre-wrap font-mono">
-    {JSON.stringify({recipe}, null, 4)}
+  <div class="prose p-4">
+    <Content />
   </div>
 
-  <div class="p-4 prose">
-    <Content />
+  <div class="whitespace-pre-wrap bg-gray-200 p-4 font-mono text-xs">
+    {JSON.stringify({ recipe }, null, 4)}
   </div>
 </Layout>
