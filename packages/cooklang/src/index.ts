@@ -32,15 +32,6 @@ declare module 'astro:content' {
   }
 }`;
 
-export default function cooklangIntegration(
-  inputConfig: AstroCooklangConfig = {}
-): AstroIntegration {
-  return {
-    name: "@astrojs/cooklang",
-    hooks: {
-      "astro:config:setup": async (params) => {
-        const { updateConfig, addContentEntryType, addPageExtension } =
-          params as SetupHookParams;
 
 /**
  *
@@ -86,21 +77,21 @@ async function getRenderModule({
   entry: ContentEntryModule;
   viteId: string;
 }) {
-  const { body } = entry;
-  // const { steps, cookwares, ingredients } = data
+  const { body, data } = entry;
+  const { steps, cookwares, ingredients } = data
   // console.log({ viteId, entry });
 
   const code = `
-          import { jsx as h } from "astro/jsx-runtime";
+import { jsx as h } from "astro/jsx-runtime";
 
-          const recipeSource = ${JSON.stringify(body, null, 4)}
+const recipeRaw = ${JSON.stringify(body, null, 4)}
 
-          export async function Content (props) {
-            return h('div', { children: [recipeSource] });
-          }
+export async function Content (props) {
+  return h('div', { children: [recipeRaw] });
+}
 
-          export default Content
-          `;
+export default Content
+`;
 
   return {
     code,
@@ -116,9 +107,9 @@ async function getRenderModule({
 const contentTypesTemplate = `
 declare module 'astro:content' {
   interface Render {
-    '.cook': Promise<{
-      Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
-    }>;
+    // '.cook': Promise<{
+    //   Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+    // }>;
   }
 }`;
 
