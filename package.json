@@ -14,7 +14,7 @@
     "build": "cd demo; astro build",
     "serve": "cd demo; astro preview",
     "release": "pnpm publish --access public",
-    "pretty": "prettier -w ./"
+    "pretty": "prettier --plugin-search-dir=./ -w ./"
   },
   "devDependencies": {
     "astro": "~2.2.3",
