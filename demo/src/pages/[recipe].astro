@@ -17,6 +17,11 @@ const { recipe } = Astro.props;
 const { Content } = await recipe.render();
 
 const title = recipe.data?.metadata?.title || recipe.slug;
+
+// You can access recipe data like this...
+const { ingredients } = recipe.data;
+
+const ingredientNames = ingredients.map((ingredient) => ingredient.name).sort();
 ---
 
 <Layout title={title}>
@@ -25,6 +30,10 @@ const title = recipe.data?.metadata?.title || recipe.slug;
   </div>
 
   <div class="prose p-4">
+    <ul>
+      {ingredientNames.map((name) => <li>{name}</li>)}
+    </ul>
+
     <Content />
   </div>
 

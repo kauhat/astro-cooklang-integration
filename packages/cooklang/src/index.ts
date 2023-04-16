@@ -5,16 +5,11 @@ import type {
   HookParameters,
   ContentEntryModule,
 } from "astro";
-import type { InlineConfig } from "vite";
-import cooklangVite from "vite-plugin-cooklang";
+import type { LoadResult, SourceDescription } from "rollup";
 import { Recipe } from "@cooklang/cooklang-ts";
 
-type SetupHookParams = HookParameters<"astro:config:setup"> & {
-  // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
-  // "`contentEntryType` is not a public API"
-  addContentEntryType: (contentEntryType: ContentEntryType) => void;
-  addPageExtension: (extension: string) => void;
-};
+// @ts-expect-erro
+// export { default as Renderer } from './Renderer.astro';
 
 // TODO: Use template to render default content display.
 type ContentTemplate = void;
@@ -23,35 +18,43 @@ export interface AstroCooklangConfig {
   contentTemplate?: ContentTemplate;
 }
 
-const contentTypesTemplate = `
-declare module 'astro:content' {
-  interface Render {
-    '.cook': Promise<{
-      Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
-    }>;
-  }
-}`;
+//
+type SetupHookParams = HookParameters<"astro:config:setup"> & {
+  // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
+  // "`contentEntryType` is not a public API"
+  addContentEntryType: (contentEntryType: ContentEntryType) => void;
+  addPageExtension: (extension: string) => void;
+};
 
+//
+// Setup entry data from files with .cook extension.
+//
 
-/**
- *
- */
-function getEntryInfo({
-  fileUrl,
-  contents,
-}: {
+type EntryInfoInput = {
   fileUrl: URL;
   contents: string;
-}) {
+};
+
+type EntryInfoOutput = {
+  data: Record<string, unknown>;
+  rawData: string;
+  body: string;
+  slug: string;
+};
+
+/**
+ * Load recipe from file contents and extract data.
+ *
+ * Output is used to build the collection entry item.
+ *
+ * @see https://docs.astro.build/en/reference/api-reference/#collection-entry-type
+ */
+function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
   // Parse the recipe...
   const recipe = new Recipe(contents);
 
   // Extract parts.
   const { ingredients, cookwares, metadata, steps, shoppingList } = recipe;
-
-  // TODO: Assemble parts into human-readable format and render (as Markdown?)
-  // We'll just use the raw file contents for now.
-  const body = contents;
 
   return {
     data: {
@@ -61,24 +64,41 @@ function getEntryInfo({
       steps,
       shoppingList,
     },
-    body,
     slug: metadata.slug,
-    rawData: "",
+    body: contents, // Should we use body or rawData for the recipe source?
+    rawData: contents,
   };
 }
 
+//
+// Using the data that was setup when handling the entry above, we generate a
+// module will allow us to display recipes in pages.
+//
+// The module returns a `<Content />` component.
+//
+// TODO: Allow content component to be customized. (see `ContentTemplate`)
+//
+
+type RenderModuleInput = {
+  entry: ContentEntryModule;
+  viteId: string;
+};
+
+type RenderModuleOutput = SourceDescription & { [additonal: string]: any };
+
 /**
+ * Build a bundleable module from recipe entry data.
  *
+ * Output is used to build the collection entry item.
+ *
+ * @see https://docs.astro.build/en/reference/api-reference/#collection-entry-type
  */
 async function getRenderModule({
   viteId,
   entry,
-}: {
-  entry: ContentEntryModule;
-  viteId: string;
-}) {
+}: RenderModuleInput): Promise<RenderModuleOutput> {
   const { body, data } = entry;
-  const { steps, cookwares, ingredients } = data
+  const { steps, cookwares, ingredients } = data;
   // console.log({ viteId, entry });
 
   const code = `
@@ -101,9 +121,7 @@ export default Content
   };
 }
 
-/**
- *
- */
+// Types for the render module's Content component.
 const contentTypesTemplate = `
 declare module 'astro:content' {
   interface Render {
@@ -113,6 +131,9 @@ declare module 'astro:content' {
   }
 }`;
 
+/**
+ * Our main Astro integration...
+ */
 export default function cooklangIntegration(
   inputConfig: AstroCooklangConfig = {}
 ): AstroIntegration {
@@ -120,20 +141,11 @@ export default function cooklangIntegration(
     name: "@astrojs/cooklang",
     hooks: {
       "astro:config:setup": async (params) => {
-        const { updateConfig, addContentEntryType, addPageExtension } =
-          params as SetupHookParams;
-
-        // Register Vite plugin...
-        // Using my vite plugin for now, but we probably want a custom
-        // transformer later.
-        // const viteConfig: InlineConfig = {
-        //   plugins: [cooklangVite()],
-        // };
-
-        // updateConfig({ vite: viteConfig });
-
-        // TODO: Try disabling.
-        addPageExtension(".cook");
+        const {
+          addContentEntryType,
+          //addPageExtension
+          //updateConfig,
+        } = params as SetupHookParams;
 
         addContentEntryType({
           extensions: [".cook"],
