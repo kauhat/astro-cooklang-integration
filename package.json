@@ -17,7 +17,7 @@
     "pretty": "prettier -w ./"
   },
   "devDependencies": {
-    "astro": "^2.3.0",
+    "astro": "~2.2.3",
     "prettier": "^2.8.7",
     "prettier-plugin-astro": "^0.8.0",
     "prettier-plugin-tailwindcss": "^0.2.7"
