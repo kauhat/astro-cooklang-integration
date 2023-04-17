@@ -1,0 +1,11 @@
+---
+const { steps } = Astro.props;
+---
+
+<ol>
+  {
+    steps.map((step) => {
+      <li>{JSON.stringify(step)}</li>;
+    })
+  }
+</ol>

@@ -8,9 +8,6 @@ import type {
 import type { LoadResult, SourceDescription } from "rollup";
 import { Recipe } from "@cooklang/cooklang-ts";
 
-// @ts-expect-erro
-// export { default as Renderer } from './Renderer.astro';
-
 // TODO: Use template to render default content display.
 type ContentTemplate = void;
 
@@ -103,11 +100,35 @@ async function getRenderModule({
 
   const code = `
 import { jsx as h } from "astro/jsx-runtime";
+import Renderer from 'astro-cooklang/Renderer.astro';
 
-const recipeRaw = ${JSON.stringify(body, null, 4)}
+const {
+  ingredients,
+  cookwares,
+  metadata,
+  steps,
+  shoppingList,
+} = ${JSON.stringify(entry.data, null, 4)}
+const raw = ${JSON.stringify(body, null, 4)}
 
+// console.log(steps)
+
+/**
+ * Use renderer component for file entry's <Content/> display.
+ */
 export async function Content (props) {
-  return h('div', { children: [recipeRaw] });
+  return h(
+    Renderer,
+    {
+      raw,
+
+      ingredients,
+      cookwares,
+      metadata,
+      steps,
+      shoppingList,
+    }
+  );
 }
 
 export default Content

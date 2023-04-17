@@ -1,0 +1,14 @@
+---
+// console.log(Astro.props);
+
+// type Props = {
+// 	config: Config;
+// 	stringifiedAst: string;
+// };
+
+import Steps from "./components/Steps.astro";
+
+const { ingredients, cookwares, metadata, steps, shoppingList } = Astro.props;
+---
+
+<Steps steps={steps} />
