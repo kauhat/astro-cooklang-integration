@@ -7,15 +7,16 @@
     "packages/*"
   ],
   "scripts": {
-    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
     "build": "pnpm -C ./packages/cooklang run build",
-    "demo:build": "pnpm run build; pnpm -C ./demo run astro build",
-    "demo:start": "pnpm run build; pnpm -C ./demo run start",
-    "demo:serve": "pnpm run build; pnpm -C ./demo run astro preview",
+    "dev": "pnpm run build -w & pnpm -C ./demo run astro dev",
+    "pretty": "prettier --plugin-search-dir=./ -w ./",
     "release": "pnpm publish --access public",
-    "pretty": "prettier --plugin-search-dir=./ -w ./"
+    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
+    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
+    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
+    "demo:build": "pnpm run build; pnpm -C ./demo run build",
+    "demo:serve": "pnpm run build; pnpm -C ./demo run serve",
+    "demo:start": "pnpm run build; pnpm -C ./demo run start"
   },
   "devDependencies": {
     "astro": "~2.2.3",
