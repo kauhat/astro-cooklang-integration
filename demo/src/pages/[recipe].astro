@@ -25,19 +25,33 @@ const ingredientNames = ingredients.map((ingredient) => ingredient.name).sort();
 ---
 
 <Layout title={title}>
-  <div class="sticky top-0 bg-gray-100 bg-inherit p-4 shadow">
-    <h1 class="text-3xl font-semibold">{title}</h1>
-  </div>
+  <h1 slot="heading" class="text-3xl font-semibold">{title}</h1>
 
+  <!-- Main -->
   <div class="prose p-4">
-    <ul>
-      {ingredientNames.map((name) => <li>{name}</li>)}
-    </ul>
+    <h2>
+      <code>&lt;Content /&gt;</code> component
+    </h2>
+
+    <hr />
 
     <Content />
   </div>
 
-  <div class="whitespace-pre-wrap bg-gray-200 p-4 font-mono text-xs">
-    {JSON.stringify({ recipe }, null, 4)}
+  <!-- Debug section -->
+  <div slot="debug" class="p-4">
+    <h3 class="mb-4 text-lg font-semibold">
+      Ingredients (from collection entry data)
+    </h3>
+
+    <ul class="list-inside list-disc">
+      {ingredientNames.map((name) => <li>{name}</li>)}
+    </ul>
+  </div>
+
+  <div slot="debug" class="p-4">
+    <h3 class="mb-4 text-lg font-semibold">Source (from collection entry)</h3>
+
+    <div class="whitespace-pre-wrap font-mono text-xs">{recipe.body}</div>
   </div>
 </Layout>

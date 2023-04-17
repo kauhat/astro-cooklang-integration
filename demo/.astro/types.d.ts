@@ -1,9 +1,9 @@
 
 declare module 'astro:content' {
   interface Render {
-    '.cook': Promise<{
-      Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
-    }>;
+    // '.cook': Promise<{
+    //   Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+    // }>;
   }
 }
 declare module 'astro:content' {
