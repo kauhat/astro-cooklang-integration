@@ -6,10 +6,6 @@ const recipes = await getCollection("recipes");
 const categories = [
   ...new Set(
     recipes
-      .map((entry) => {
-        console.log(entry);
-        return entry;
-      })
       .map((entry) => entry.data?.category)
   ),
 ];
