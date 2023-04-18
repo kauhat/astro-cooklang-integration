@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="100%" src="./demo/src/components/Banner.svg" alt="Astro Cooklang Banner"/>
+  <img width="100%" src="demo/src/components/Banner.svg" alt="Astro Cooklang Banner"/>
 </div>
 
 # Astro Cooklang Integration
@@ -49,9 +49,8 @@ export const collections = {
       // Add recipe properties.
       ...recipeSchema,
 
+      // Metadata is top level.
       title: z.string().optional(),
-      category: z.string().optional(),
-      tags: z.array(z.string()).default([]),
     }),
   }),
 };
@@ -87,8 +86,9 @@ See the [test project](./test/example) for an example of using this plugin.
 ## TODO
 
 - [x] Write a readme.
-- [ ] Add vitest tests to demo project.
 - [ ] Allow renderer component to be customized.
+- [ ] Use categories in demo project.
+- [ ] Add vitest tests to demo project.
 
 ## Thanks
 
