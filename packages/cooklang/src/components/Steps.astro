@@ -1,11 +1,41 @@
 ---
+import type { Step } from "@cooklang/cooklang-ts";
+
 const { steps } = Astro.props;
 ---
 
 <ol>
   {
-    steps.map((step) => {
-      <li>{JSON.stringify(step)}</li>;
+    steps.map((stepParts: Step) => {
+      return (
+        <li>
+          {stepParts.map((part) => {
+            if (part.type === "text") {
+              return part.value;
+            }
+
+            if (part.type === "ingredient") {
+              return (
+                <span data-quantity={part.quantity} data-units={part.units}>
+                  {part.name}
+                </span>
+              );
+            }
+
+            if (part.type === "cookware") {
+              return <span data-quantity={part.quantity}>{part.name}</span>;
+            }
+
+            if (part.type === "timer") {
+              return (
+                <span data-quantity={part.quantity} data-units={part.units}>
+                  {part.name}
+                </span>
+              );
+            }
+          })}
+        </li>
+      );
     })
   }
 </ol>

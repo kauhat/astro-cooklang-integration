@@ -6,9 +6,14 @@
 // 	stringifiedAst: string;
 // };
 
-import Steps from "./components/Steps.astro";
+import Ingredients from "./Ingredients.astro";
+import Steps from "./Steps.astro";
 
 const { ingredients, cookwares, metadata, steps, shoppingList } = Astro.props;
 ---
 
+<h2>Ingredients</h2>
+<Ingredients ingredients={ingredients} />
+
+<h2>Steps</h2>
 <Steps steps={steps} />

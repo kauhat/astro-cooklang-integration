@@ -1,0 +1,17 @@
+---
+import type { Ingredient } from "@cooklang/cooklang-ts";
+
+const { ingredients } = Astro.props;
+---
+
+<ol>
+  {
+    ingredients.map((ingredient: Ingredient) => {
+      return (
+        <li data-quantity={ingredient.quantity} data-units={ingredient.units}>
+          {ingredient.name}
+        </li>
+      );
+    })
+  }
+</ol>
