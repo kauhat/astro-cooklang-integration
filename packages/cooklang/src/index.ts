@@ -1,5 +1,6 @@
 import { Recipe } from "@cooklang/cooklang-ts";
 import type { LoadResult, SourceDescription } from "rollup";
+import z from "zod";
 import type {
   AstroConfig,
   AstroIntegration,
@@ -14,6 +15,23 @@ type ContentTemplate = void;
 export interface AstroCooklangConfig {
   contentTemplate?: ContentTemplate;
 }
+
+//
+// Content schemas...
+//
+
+export const shoppingItemSchema = z.object({
+  name: z.string(),
+  synonym: z.string().optional(),
+});
+
+export const recipeSchema = {
+  ingredients: z.array(z.any()).default([]),
+  cookwares: z.array(z.any()).default([]),
+  metadata: z.any().default({}),
+  steps: z.array(z.array(z.any())).default([]),
+  shoppingList: z.record(shoppingItemSchema).optional(),
+};
 
 //
 type SetupHookParams = HookParameters<"astro:config:setup"> & {
