@@ -3,13 +3,30 @@
     Astro Cooklang
   </text>
 
-  <text x="77" y="100" class="wobble">
+  <text x="77" y="100" class="chef wobble">
     👨‍🍳
   </text>
 
-  <text x="727" y="200" class="wobble">
+  <text x="727" y="200" class="chef wobble">
     👩‍🍳
   </text>
+
+  <text x="177" y="80" class="food wobble">
+    🥣
+  </text>
+
+  <text x="547" y="220" class="food wobble">
+    ⏲️
+  </text>
+
+  <text x="107" y="217" class="food wobble">
+    🍅
+  </text>
+
+  <text x="137" y="200" class="food wobble">
+    🔪
+  </text>
+
 
   <style type="text/css">
     svg {
@@ -20,7 +37,6 @@
     }
 
     svg text {
-      font-size: 80px;
       text-anchor: middle;
     }
 
@@ -30,23 +46,32 @@
       font-family: system-ui;
     }
 
-    .wobble {
-      --rotate-wobble: 0deg;
+    .chef {
+      font-size: 80px;
+    }
 
-      rotate: calc(var(--rotate-wobble) + 0deg);
+    .food {
+      font-size: 60px;
+    }
+
+    .wobble {
+      --wobble-fac: 0.0;
+      --wobble-delay: 3s;
+
+      rotate: calc(var(--wobble-fac) * 0deg);
       transform: translateY(0px);
       transform-box: fill-box;
       transform-origin: center 60%;
+
+      animation-delay: calc(var(--wobble-delay) + 1s * var(--wobble-fac));
     }
 
     .wobble:nth-child(1) {
-      --rotate-wobble: -3deg;
+      --wobble-fac: 0.7deg;
     }
 
     .wobble:nth-child(2) {
-      --rotate-wobble: 10deg;
-
-      /* animation-delay: 10s */
+      --wobble-fac: 1.1deg;
     }
 
     @media screen and (prefers-reduced-motion: no-preference) {
@@ -57,26 +82,26 @@
 
     @keyframes wobble {
       32% {
-        rotate: calc(var(--rotate-wobble) + 0deg);
+        rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 0deg);
       }
 
       34% {
         transform: translateY(0px);
-        rotate: calc(var(--rotate-wobble) + -20deg);
+        rotate: calc(var(--wobble-fac) * var(--wobble-amount) + -20deg);
       }
 
       36% {
-        rotate: calc(var(--rotate-wobble) + 0deg);
+        rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 0deg);
       }
 
       38% {
-        rotate: calc(var(--rotate-wobble) + 20deg);
+        rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 20deg);
       }
 
       40% {
-        rotate: calc(var(--rotate-wobble) + 0deg);
+        rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 0deg);
       }
     }
 
-    </stlye>
+    </style>
 </svg>

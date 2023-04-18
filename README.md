@@ -1,4 +1,6 @@
-![Astro Cooklang Banner](./demo/src/components/Banner.svg)
+<div align="center">
+  <img width="100%" src="./demo/src/components/Banner.svg" alt="Astro Cooklang Banner"/>
+</div>
 
 # Astro Cooklang Integration
 
