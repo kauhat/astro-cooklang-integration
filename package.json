@@ -19,6 +19,7 @@
     "demo:start": "pnpm run build; pnpm -C ./demo run start"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "astro": "~2.2.3",
     "prettier": "^2.8.7",
     "prettier-plugin-astro": "^0.8.0",
