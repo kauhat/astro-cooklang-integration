@@ -1,0 +1,82 @@
+<svg viewBox="0 0 814 250">
+  <text x="406" y="144" class="title">
+    Astro Cooklang
+  </text>
+
+  <text x="77" y="100" class="wobble">
+    👨‍🍳
+  </text>
+
+  <text x="727" y="200" class="wobble">
+    👩‍🍳
+  </text>
+
+  <style type="text/css">
+    svg {
+      background: #eee;
+      display: block;
+      width: 814px;
+      margin: auto;
+    }
+
+    svg text {
+      font-size: 80px;
+      text-anchor: middle;
+    }
+
+    .title {
+      font-size: 5rem;
+      font-weight: 600;
+      font-family: system-ui;
+    }
+
+    .wobble {
+      --rotate-wobble: 0deg;
+
+      rotate: calc(var(--rotate-wobble) + 0deg);
+      transform: translateY(0px);
+      transform-box: fill-box;
+      transform-origin: center 60%;
+    }
+
+    .wobble:nth-child(1) {
+      --rotate-wobble: -3deg;
+    }
+
+    .wobble:nth-child(2) {
+      --rotate-wobble: 10deg;
+
+      /* animation-delay: 10s */
+    }
+
+    @media screen and (prefers-reduced-motion: no-preference) {
+      .wobble {
+        animation: wobble 2s 8s ease;
+      }
+    }
+
+    @keyframes wobble {
+      32% {
+        rotate: calc(var(--rotate-wobble) + 0deg);
+      }
+
+      34% {
+        transform: translateY(0px);
+        rotate: calc(var(--rotate-wobble) + -20deg);
+      }
+
+      36% {
+        rotate: calc(var(--rotate-wobble) + 0deg);
+      }
+
+      38% {
+        rotate: calc(var(--rotate-wobble) + 20deg);
+      }
+
+      40% {
+        rotate: calc(var(--rotate-wobble) + 0deg);
+      }
+    }
+
+    </stlye>
+</svg>
