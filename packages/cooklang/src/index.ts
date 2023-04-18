@@ -1,12 +1,12 @@
+import { Recipe } from "@cooklang/cooklang-ts";
+import type { LoadResult, SourceDescription } from "rollup";
 import type {
   AstroConfig,
   AstroIntegration,
+  ContentEntryModule,
   ContentEntryType,
   HookParameters,
-  ContentEntryModule,
 } from "astro";
-import type { LoadResult, SourceDescription } from "rollup";
-import { Recipe } from "@cooklang/cooklang-ts";
 
 // TODO: Use template to render default content display.
 type ContentTemplate = void;
@@ -109,9 +109,8 @@ const {
   steps,
   shoppingList,
 } = ${JSON.stringify(entry.data, null, 4)}
-const raw = ${JSON.stringify(body, null, 4)}
 
-// console.log(steps)
+const raw = ${JSON.stringify(body, null, 4)}
 
 /**
  * Use renderer component for file entry's <Content/> display.

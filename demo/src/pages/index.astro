@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Banner from "../../../banner.svg";
 import Layout from "../layouts/Layout.astro";
 
 const recipes = await getCollection("recipes");
@@ -10,6 +11,8 @@ const tags = [...new Set(recipes.flatMap((entry) => entry.data?.tags))];
 
 <Layout>
   <h1 slot="heading" class="text-3xl font-semibold">Cookbook</h1>
+
+  <Banner />
 
   {JSON.stringify({ categories, tags }, null, 2)}
 </Layout>
