@@ -18,6 +18,7 @@ const tags = [...new Set(recipes.flatMap((entry) => entry.data?.tags))];
     <h3 class="mb-4 text-lg font-semibold">Categories & Tags</h3>
 
     <div class="whitespace-pre-wrap font-mono text-xs">
-      {JSON.stringify({ categories, tags }, null, 2)}</div>
+      {JSON.stringify({ categories, tags }, null, 2)}
+    </div>
   </div>
 </Layout>

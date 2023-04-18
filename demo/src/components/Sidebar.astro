@@ -2,9 +2,15 @@
 import { getCollection } from "astro:content";
 
 const recipes = await getCollection("recipes");
+
+const categories = [
+  ...new Set(
+    recipes.map((entry) => entry.data.category).filter((category) => !!category)
+  ),
+];
 ---
 
-<nav>
+<nav class="space-y-3">
   <h1 class="mb-4 text-lg font-semibold">Recipes</h1>
 
   <ul class="flex flex-col overflow-hidden">
@@ -17,5 +23,11 @@ const recipes = await getCollection("recipes");
         </li>
       ))
     }
+  </ul>
+
+  <h1 class="mb-4 text-lg font-semibold">Categories</h1>
+
+  <ul class="flex flex-col overflow-hidden">
+    {categories.map((category) => <li>{category}</li>)}
   </ul>
 </nav>

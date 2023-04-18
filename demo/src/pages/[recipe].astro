@@ -29,9 +29,13 @@ const title = entry.data.title || entry.slug;
   <!-- Main -->
   <div class="prose w-full p-4">
     <Content />
-
-    <p>Rendered with <code>&lt;Content /&gt;</code> component.</p>
   </div>
+
+  <footer class="mt-auto p-4 text-center">
+    <p class="text-neutral-600">
+      Rendered with <code>&lt;Content /&gt;</code> component.
+    </p>
+  </footer>
 
   <!-- Debug section blocks -->
   <div slot="debug" class="p-4">
