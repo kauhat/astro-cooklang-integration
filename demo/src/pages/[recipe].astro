@@ -16,12 +16,11 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const title = entry.data?.metadata?.title || entry.slug;
-
 // You can access recipe data like this...
-const { ingredients } = entry.data;
+const { ingredients, metadata } = entry.data;
 
-const ingredientNames = ingredients.map((ingredient) => ingredient.name).sort();
+// But metadata is also top level...
+const title = entry.data.title || entry.slug;
 ---
 
 <Layout title={title}>
@@ -41,8 +40,16 @@ const ingredientNames = ingredients.map((ingredient) => ingredient.name).sort();
     </h3>
 
     <ul class="list-inside list-disc">
-      {ingredientNames.map((name) => <li>{name}</li>)}
+      {ingredients.map(({ name }) => <li>{name}</li>)}
     </ul>
+  </div>
+
+  <div slot="debug" class="p-4">
+    <h3 class="mb-4 text-lg font-semibold">Metadata (from collection entry)</h3>
+
+    <div class="whitespace-pre-wrap font-mono text-xs">
+      {JSON.stringify(metadata, null, 4)}
+    </div>
   </div>
 
   <div slot="debug" class="p-4">
