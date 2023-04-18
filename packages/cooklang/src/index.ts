@@ -28,7 +28,7 @@ export const shoppingItemSchema = z.object({
 export const recipeSchema = {
   ingredients: z.array(z.any()).default([]),
   cookwares: z.array(z.any()).default([]),
-  metadata: z.any().default({}),
+  metadata: z.any().optional(),
   steps: z.array(z.array(z.any())).default([]),
   shoppingList: z.record(shoppingItemSchema).optional(),
 };
@@ -71,15 +71,20 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
   // Extract parts.
   const { ingredients, cookwares, metadata, steps, shoppingList } = recipe;
 
+  const data = {
+    // Add recipe metadata properties as top level.
+    ...metadata,
+
+    ingredients,
+    cookwares,
+    metadata,
+    steps,
+    shoppingList,
+  };
+
   return {
-    data: {
-      ingredients,
-      cookwares,
-      metadata,
-      steps,
-      shoppingList,
-    },
     slug: metadata.slug,
+    data,
     body: contents, // Should we use body or rawData for the recipe source?
     rawData: contents,
   };
@@ -114,7 +119,6 @@ async function getRenderModule({
 }: RenderModuleInput): Promise<RenderModuleOutput> {
   const { body, data } = entry;
   const { steps, cookwares, ingredients } = data;
-  // console.log({ viteId, entry });
 
   const code = `
 import { jsx as h } from "astro/jsx-runtime";

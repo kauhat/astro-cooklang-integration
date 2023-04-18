@@ -9,7 +9,9 @@ export const collections = {
 
       title: z.string().optional(),
       category: z.string().optional(),
-      tags: z.array(z.string()).default([]),
+
+      // FIXME: How should metadata property object/array output work?
+      // tags: z.array(z.string()).default([]),
     }),
   }),
 };

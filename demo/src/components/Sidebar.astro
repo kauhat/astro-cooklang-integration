@@ -12,7 +12,7 @@ const recipes = await getCollection("recipes");
       recipes.map((recipe) => (
         <li>
           <a href={recipe.slug} class="text-blue-500">
-            {recipe.data?.metadata?.title || recipe.slug}
+            {recipe.data.title || recipe.slug}
           </a>
         </li>
       ))
