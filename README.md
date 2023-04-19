@@ -99,7 +99,7 @@ const title = entry.data.title || entry.slug;
 <Content />
 ```
 
-See the [test project](./test/example) for an example of using this plugin.
+See the [demo site](./demo) for an example Astro site using this integration.
 
 ## TODO
 
