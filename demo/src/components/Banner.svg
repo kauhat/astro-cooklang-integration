@@ -1,4 +1,5 @@
-<svg viewBox="0 0 814 250">
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 814 250" xmlns="http://www.w3.org/2000/svg">
   <text x="406" y="144" class="title">
     Astro Cooklang
   </text>
@@ -15,6 +16,10 @@
     🥣
   </text>
 
+  <text x="347" y="210" class="food wobble">
+    🌯
+  </text>
+
   <text x="547" y="220" class="food wobble">
     ⏲️
   </text>
@@ -26,7 +31,6 @@
   <text x="137" y="200" class="food wobble">
     🔪
   </text>
-
 
   <style type="text/css">
     svg {
@@ -55,15 +59,15 @@
     }
 
     .wobble {
-      --wobble-fac: 0.0;
-      --wobble-delay: 3s;
+      --wobble-fac: 1.0;
+      --wobble-delay: 1s;
 
       rotate: calc(var(--wobble-fac) * 0deg);
+
       transform: translateY(0px);
       transform-box: fill-box;
       transform-origin: center 60%;
 
-      animation-delay: calc(var(--wobble-delay) + 1s * var(--wobble-fac));
     }
 
     .wobble:nth-child(1) {
@@ -74,9 +78,26 @@
       --wobble-fac: 1.1deg;
     }
 
+    .wobble:nth-child(3) {
+      --wobble-fac: 1.4deg;
+    }
+
+    .wobble:nth-child(4) {
+      --wobble-fac: 0.3deg;
+    }
+
+    .wobble:nth-child(5) {
+      --wobble-fac: 1.4deg;
+    }
+
+    .wobble:nth-child(6) {
+      --wobble-fac: 0.3deg;
+    }
+
     @media screen and (prefers-reduced-motion: no-preference) {
       .wobble {
-        animation: wobble 2s 8s ease;
+        animation: wobble 6s 8s ease;
+        animation-delay: calc(var(--wobble-delay) + 0.5s * var(--wobble-fac));
       }
     }
 
@@ -95,13 +116,14 @@
       }
 
       38% {
+        /* transform: translateY(10px); */
         rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 20deg);
       }
 
       40% {
         rotate: calc(var(--wobble-fac) * var(--wobble-amount) + 0deg);
+        /* transform: translateX(10px) translateY(5px); */
       }
     }
-
-    </style>
+  </style>
 </svg>

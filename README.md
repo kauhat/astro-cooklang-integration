@@ -36,7 +36,10 @@ export default defineConfig({
 });
 ```
 
+## Usage
+
 Extend the base recipe schema in your content collections [configuration file](https://docs.astro.build/en/guides/content-collections/#defining-collections).
+
 
 ```ts
 // ./src/content/config.js
@@ -56,17 +59,29 @@ export const collections = {
 };
 ```
 
-## Usage
+Recipe entries are loaded using the [Cooklang-TS](https://github.com/cooklang/cooklang-ts) library and have the properties shown below:
 
-Recipe entries are loaded using the [Cooklang-TS](https://github.com/cooklang/cooklang-ts) library.
 
 ```astro
 ---
-import recipe from "./test/example/recipes/Easy Pancakes.cook";
+// ./src/pages/[recipe].astro
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const recipeEntries = await getCollection("recipes");
+
+  return recipeEntries.map((entry) => {
+    return {
+      params: { recipe: entry.slug },
+      props: { entry },
+    };
+  });
+}
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+// You can access recipe data like this...
 const {
   //
   ingredients,
@@ -75,9 +90,12 @@ const {
   steps,
   shoppingList,
 } = entry.data;
+
+// But metadata is also top level...
+const title = entry.data.title || entry.slug;
 ---
 
-<!-- Render the recipe in your page template -->
+<!-- Render the recipe in your page -->
 <Content />
 ```
 
