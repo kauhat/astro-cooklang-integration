@@ -5,15 +5,14 @@ const { ...data } = Astro.props;
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // const currentPage = Astro.url.pathname;
 
-const title = data.title ?? "Cookbook"
-
+const title = data.title ?? "Cookbook";
 ---
 
 <html>
   <head>
     <title>{title}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body class="flex min-h-screen overflow-y-scroll bg-indigo-50">
@@ -31,6 +30,7 @@ const title = data.title ?? "Cookbook"
           </div>
         </section>
 
+        <!-- Main content -->
         <main
           role="main"
           class="mb-6 min-h-[calc(100vh-5rem)] w-full sm:w-2/3 md:w-3/4"
@@ -49,8 +49,9 @@ const title = data.title ?? "Cookbook"
           </div>
         </main>
 
+        <!-- Debug -->
         <div
-          class="flex w-full flex-col divide-y divide-neutral-300 rounded-md border border-neutral-400 bg-neutral-200 shadow"
+          class="debug flex w-full flex-col divide-y divide-neutral-300 rounded-md border border-neutral-400 bg-neutral-200 shadow"
         >
           <h2 class="m-4 text-xl font-semibold">Debug</h2>
 
@@ -58,7 +59,11 @@ const title = data.title ?? "Cookbook"
         </div>
       </div>
     </div>
-
-    <!-- <Footer path={currentFile} /> -->
   </body>
 </html>
+
+<style type="text/css">
+  .debug .astro-debug > * {
+    border-radius: 0;
+  }
+</style>
