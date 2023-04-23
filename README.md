@@ -99,11 +99,13 @@ See the [demo site](./demo) for an example Astro site using this integration.
 ## TODO
 
 - [x] Write a readme
-- [ ] Allow renderer component to be customized
-- [ ] Find and display recipe images
+- [ ] Allow renderer component to be customized [#2](https://github.com/kauhat/astro-cooklang-integration/issues/2)
+- [ ] Find and display recipe images [#3](https://github.com/kauhat/astro-cooklang-integration/issues/3)
+- [ ] Properly handle conflicting filenames [#5](https://github.com/kauhat/astro-cooklang-integration/issues/5)
+- [ ] Add test fixtures [#4](https://github.com/kauhat/astro-cooklang-integration/issues/4)
+- [ ] Setup deploy action [#6](https://github.com/kauhat/astro-cooklang-integration/issues/6)
 - [ ] Show how to use categories in demo project
 - [ ] Show how to use tags in demo project
-- [ ] Add tests
 
 ## Thanks
 
