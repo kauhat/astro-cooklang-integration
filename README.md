@@ -22,7 +22,7 @@ yarn add -D astro-cooklang
 
 ### Update your config
 
-Add the plugin to your Astro site's config..
+Add the plugin to your Astro site's config.
 
 ```ts
 // ./astro.config.js
@@ -39,7 +39,6 @@ export default defineConfig({
 ## Usage
 
 Extend the base recipe schema in your content collections [configuration file](https://docs.astro.build/en/guides/content-collections/#defining-collections).
-
 
 ```ts
 // ./src/content/config.js
@@ -59,12 +58,11 @@ export const collections = {
 };
 ```
 
-Recipe entries are loaded using the [Cooklang-TS](https://github.com/cooklang/cooklang-ts) library and have the properties shown below:
-
+Recipe entries are loaded using the [Cooklang-TS](https://github.com/cooklang/cooklang-ts) library and have the properties shown below.
 
 ```astro
 ---
-// ./src/pages/[recipe].astro
+// ./src/pages/[...recipe].astro
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -72,30 +70,27 @@ export async function getStaticPaths() {
 
   return recipeEntries.map((entry) => {
     return {
-      params: { recipe: entry.slug },
+      params: {
+        // e.g `spec/fried-rice`
+        recipe: entry.slug,
+      },
       props: { entry },
     };
   });
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
 
 // You can access recipe data like this...
-const {
-  //
-  ingredients,
-  cookwares,
-  metadata,
-  steps,
-  shoppingList,
-} = entry.data;
+const { ingredients, cookwares, metadata, steps, shoppingList } = entry.data;
 
 // But metadata is also top level...
 const title = entry.data.title || entry.slug;
+
+// Use the Content component to render the recipe to HTML in your template.
+const { Content } = await entry.render();
 ---
 
-<!-- Render the recipe in your page -->
 <Content />
 ```
 
@@ -103,10 +98,12 @@ See the [demo site](./demo) for an example Astro site using this integration.
 
 ## TODO
 
-- [x] Write a readme.
-- [ ] Allow renderer component to be customized.
-- [ ] Use categories in demo project.
-- [ ] Add vitest tests to demo project.
+- [x] Write a readme
+- [ ] Allow renderer component to be customized
+- [ ] Find and display recipe images
+- [ ] Show how to use categories in demo project
+- [ ] Show how to use tags in demo project
+- [ ] Add tests
 
 ## Thanks
 
