@@ -12,4 +12,4 @@ This is a normal markdown file for comparison.
 2. Two
 3. Three
 
-Nothing special here.
+Nothing special here. Except for these “special characters” 🔥
