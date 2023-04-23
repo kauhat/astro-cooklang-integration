@@ -14,27 +14,18 @@ const projectUrl = "https://github.com/kauhat/astro-cooklang-integration";
 ---
 
 <Layout>
-  <div slot="heading" class="p-4">
+  <!-- <div slot="heading" class="p-4">
     <h1 class="text-3xl font-semibold">Astro Cooklang Cookbook</h1>
-  </div>
+  </div> -->
 
   <img src={Banner} alt="Astro Cooklang Banner" />
 
   <div class="prose p-4">
-    This is a demo site for the <a href={projectUrl} target="_blank"
-      >Astro Cooklang integration</a
-    >.
+    This is a demo site for the
+    <a href={projectUrl} target="_blank">Astro Cooklang integration</a>.
   </div>
 
   <div slot="debug">
     <Debug {{categories, tags}} />
   </div>
-
-  <!-- <div slot="debug" class="p-4">
-    <h3 class="mb-4 text-lg font-semibold">Categories & Tags</h3>
-
-    <div class="whitespace-pre-wrap font-mono text-xs">
-      {JSON.stringify({ categories, tags }, null, 2)}
-    </div>
-  </div> -->
 </Layout>
