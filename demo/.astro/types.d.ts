@@ -110,34 +110,20 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"recipes": {
-"Coffee Souffle.cook": {
-  id: "Coffee Souffle.cook",
-  slug: "coffee-souffle",
+"duplicate.cook": {
+  id: "duplicate.cook",
+  slug: "duplicate",
   body: string,
   collection: "recipes",
   data: InferEntrySchema<"recipes">
 } & { render(): Render[".cook"] },
-"Easy Pancakes.cook": {
-  id: "Easy Pancakes.cook",
-  slug: "easy-pancakes",
+"duplicate.md": {
+  id: "duplicate.md",
+  slug: "duplicate",
   body: string,
   collection: "recipes",
   data: InferEntrySchema<"recipes">
-} & { render(): Render[".cook"] },
-"Fried Rice.cook": {
-  id: "Fried Rice.cook",
-  slug: "fried-rice",
-  body: string,
-  collection: "recipes",
-  data: InferEntrySchema<"recipes">
-} & { render(): Render[".cook"] },
-"Olivier Salad.cook": {
-  id: "Olivier Salad.cook",
-  slug: "olivier-salad",
-  body: string,
-  collection: "recipes",
-  data: InferEntrySchema<"recipes">
-} & { render(): Render[".cook"] },
+} & { render(): Render[".md"] },
 "markdown.md": {
   id: "markdown.md",
   slug: "markdown",
@@ -145,6 +131,34 @@ declare module 'astro:content' {
   collection: "recipes",
   data: InferEntrySchema<"recipes">
 } & { render(): Render[".md"] },
+"spec/Coffee Souffle.cook": {
+  id: "spec/Coffee Souffle.cook",
+  slug: "spec/coffee-souffle",
+  body: string,
+  collection: "recipes",
+  data: InferEntrySchema<"recipes">
+} & { render(): Render[".cook"] },
+"spec/Easy Pancakes.cook": {
+  id: "spec/Easy Pancakes.cook",
+  slug: "spec/easy-pancakes",
+  body: string,
+  collection: "recipes",
+  data: InferEntrySchema<"recipes">
+} & { render(): Render[".cook"] },
+"spec/Fried Rice.cook": {
+  id: "spec/Fried Rice.cook",
+  slug: "spec/fried-rice",
+  body: string,
+  collection: "recipes",
+  data: InferEntrySchema<"recipes">
+} & { render(): Render[".cook"] },
+"spec/Olivier Salad.cook": {
+  id: "spec/Olivier Salad.cook",
+  slug: "spec/olivier-salad",
+  body: string,
+  collection: "recipes",
+  data: InferEntrySchema<"recipes">
+} & { render(): Render[".cook"] },
 },
 
 	};

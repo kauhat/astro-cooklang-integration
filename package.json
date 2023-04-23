@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "pnpm -C ./packages/cooklang run build",
-    "dev": "pnpm run build -w & pnpm -C ./demo run astro dev",
+    "dev": "pnpm run build -w && pnpm -C ./demo run astro dev",
     "pretty": "prettier --plugin-search-dir=./ -w ./",
     "release": "pnpm -C ./packages/cooklang publish",
     "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "astro": "~2.2.3",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.8.0",
     "prettier-plugin-tailwindcss": "^0.2.7"
   }
