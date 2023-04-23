@@ -62,8 +62,17 @@ const title = data.title ?? "Cookbook";
   </body>
 </html>
 
-<style type="text/css">
+<style is:global>
+  .debug {
+    display: none;
+  }
+
+  .debug .astro-debug {
+    padding: 0;
+  }
+
   .debug .astro-debug > * {
     border-radius: 0;
+    margin: 0;
   }
 </style>
