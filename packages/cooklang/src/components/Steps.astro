@@ -15,21 +15,44 @@ const { steps } = Astro.props;
             }
 
             if (part.type === "ingredient") {
+              const { name, quantity, units } = part;
+
+              const details = [quantity, units].filter((item) => !!item);
+
+              const text =
+                details.length > 0
+                  ? `${name} (${details.join(" ")})`
+                  : `${name}`;
+
               return (
-                <span data-quantity={part.quantity} data-units={part.units}>
-                  {part.name}
+                <span data-quantity={quantity} data-units={units}>
+                  {text}
                 </span>
               );
             }
 
             if (part.type === "cookware") {
-              return <span data-quantity={part.quantity}>{part.name}</span>;
+              const { name, quantity } = part;
+
+              const text = !!quantity //
+                ? `${name} (${quantity})`
+                : `${name}`;
+
+              return <span data-quantity={quantity}>{text}</span>;
             }
 
             if (part.type === "timer") {
+              const { name, quantity, units } = part;
+
+              const details = [quantity, units].filter((item) => !!item);
+
+              const text = name
+                ? `${details.join(" ")} (${name}))`
+                : `${details.join(" ")}`;
+
               return (
-                <span data-quantity={part.quantity} data-units={part.units}>
-                  {part.name}
+                <span data-quantity={quantity} data-units={units}>
+                  {text}
                 </span>
               );
             }
