@@ -83,11 +83,11 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
     // Add recipe metadata properties as top level.
     ...metadata,
 
-    ingredients,
     cookwares,
+    ingredients,
     metadata,
-    steps,
     shoppingList,
+    steps,
   };
 
   return {
@@ -126,21 +126,29 @@ async function getRenderModule({
   entry,
 }: RenderModuleInput): Promise<RenderModuleOutput> {
   const { body, data } = entry;
-  const { steps, cookwares, ingredients } = data;
+  const { cookwares, ingredients, metadata, shoppingList, steps } = data;
 
   const code = `
 import { jsx as h } from "astro/jsx-runtime";
+
+// TODO: How can we load a user given renderer?
 import Renderer from 'astro-cooklang/Renderer.astro';
 
-const {
-  ingredients,
-  cookwares,
-  metadata,
-  steps,
-  shoppingList,
-} = ${JSON.stringify(entry.data, null, 4)}
+/**
+ * Source cooklang file.
+ */
+const raw = ${JSON.stringify(body)}
 
-const raw = ${JSON.stringify(body, null, 4)}
+/**
+ * Parsed recipe data.
+ */
+const {
+  cookwares,
+  ingredients,
+  metadata,
+  shoppingList,
+  steps,
+} = ${JSON.stringify({ cookwares, ingredients, metadata, shoppingList, steps })}
 
 /**
  * Use renderer component for file entry's <Content/> display.
