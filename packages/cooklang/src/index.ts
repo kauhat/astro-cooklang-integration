@@ -1,4 +1,4 @@
-import { Recipe } from "@cooklang/cooklang-ts";
+import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
 import type { LoadResult, SourceDescription } from "rollup";
 import z from "zod";
 import type {
@@ -70,6 +70,14 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
 
   // Extract parts.
   const { ingredients, cookwares, metadata, steps, shoppingList } = recipe;
+
+  // TODO: Find images matching recipe name fitting spec conventions.
+  //
+  // I don't think we'll be able to use `getImageURL()` here, we probably need
+  // to search the content directory for multiple image extensions.
+  //
+  // https://cooklang.org/docs/spec/#adding-pictures
+  // https://cooklang.github.io/cooklang-ts/modules.html#getImageURL
 
   const data = {
     // Add recipe metadata properties as top level.
