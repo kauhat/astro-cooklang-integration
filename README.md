@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="100%" src="demo/src/components/Banner.svg" alt="Astro Cooklang Banner"/>
+  <img width="100%" src="./banner.svg" alt="Astro Cooklang Banner"/>
 </div>
 
 # Astro Cooklang Integration
@@ -8,7 +8,7 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![Github Actions][github-actions-src]][github-actions-href]
 
-This integration adds support for `.cook` format files to be loaded as [content collections](https://docs.astro.build/en/guides/content-collections/).
+This integration adds support to load `.cook` format files as [content collections](https://docs.astro.build/en/guides/content-collections/).
 
 ## Setup
 
@@ -22,7 +22,7 @@ yarn add -D astro-cooklang
 
 ### Update your config
 
-Add the plugin to your Astro site's config as below:
+Add the plugin to your Astro site's config..
 
 ```ts
 // ./astro.config.js
