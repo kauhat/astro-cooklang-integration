@@ -4,20 +4,23 @@ import Sidebar from "../components/Sidebar.astro";
 const { ...data } = Astro.props;
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // const currentPage = Astro.url.pathname;
+
+const title = data.title ?? "Cookbook"
+
 ---
 
 <html>
   <head>
-    <title>
-      {data.title || "Cookbook"}
-    </title>
+    <title>{title}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body class="flex min-h-screen overflow-y-scroll bg-indigo-50">
     <div class="container mx-auto flex flex-col">
       <header class="px-4 pt-6">
         <a href="/">
-          <h1 class="text-2xl font-semibold">Astro Cookbook</h1>
+          <h1 class="text-2xl font-semibold">Astro Cooklang Cookbook</h1>
         </a>
       </header>
 
@@ -36,7 +39,7 @@ const { ...data } = Astro.props;
             class="flex h-full flex-col rounded-md border border-neutral-300 bg-neutral-50 shadow"
             style="contain: paint;"
           >
-            <div class="sticky top-0 bg-inherit bg-neutral-100 p-4 shadow-sm">
+            <div class="sticky top-0 bg-inherit bg-neutral-100 shadow-sm">
               <slot name="heading" />
             </div>
 
