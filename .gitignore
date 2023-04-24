@@ -7,3 +7,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 .DS_Store
+
+# Devenv
+.devenv*
+devenv.local.nix
+
