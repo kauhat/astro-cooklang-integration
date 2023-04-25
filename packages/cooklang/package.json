@@ -16,10 +16,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./components": {
-      "types": "./dist/components.d.ts",
-      "default": "./dist/components.js"
-    },
     "./Renderer.astro": {
       "default": "./src/components/Renderer.astro"
     }
