@@ -5,13 +5,13 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.nodePackages.pnpm ];
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = "echo hello from $GREET";
+  scripts.buildPackage.exec = "pnpm -w run build $1";
+  scripts.buildDemo.exec = "pnpm -w run demo:build $1";
 
   enterShell = ''
-    hello
     git --version
   '';
 
@@ -24,14 +24,14 @@
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks = {
     # shellcheck.enable = true;
-    prettier.enable = true;
+    # prettier.enable = true;
   };
 
   # https://devenv.sh/processes/
   # processes.ping.exec = "ping example.com";
   processes = {
-    build.exec = "pnpm -w run build -w";
-    build-demo.exec = "pnpm -w run demo:start";
+    build.exec = "buildPackage -w";
+    build-demo.exec = "buildDemo";
   };
 
   # See full reference at https://devenv.sh/reference/options/
