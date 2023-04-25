@@ -6,10 +6,7 @@ on:
 
 jobs:
   tests:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
@@ -20,6 +17,7 @@ jobs:
         run: nix profile install github:cachix/devenv/latest
         shell: sh
       - run: devenv ci
+      - run: devenv shell pnpm install
       - run: devenv shell buildPackage && buildDemo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
