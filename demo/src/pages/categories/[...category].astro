@@ -1,0 +1,63 @@
+---
+import { Debug } from "astro/components";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const recipeEntries = await getCollection("recipes");
+
+  // Map recipes by category.
+  const categoryMap = new Map();
+
+  recipeEntries.forEach((entry) => {
+    const { data } = entry;
+    const { category } = data;
+
+    const categoryRecipes = categoryMap.get(category);
+
+    if (categoryRecipes) {
+      categoryRecipes.push(entry);
+    } else {
+      categoryMap.set(category, [entry]);
+    }
+  });
+
+  // Return category pages...
+  const paths = [];
+
+  for (const [key, value] of categoryMap.entries()) {
+    paths.push({
+      params: {
+        category: key,
+      },
+      props: { category: key, recipes: value },
+    });
+  }
+
+  return paths;
+}
+
+const { category, recipes } = Astro.props;
+const title = category;
+---
+
+<Layout title={title}>
+  <div slot="heading" class="p-4">
+    <h1 class="text-3xl font-semibold">{title}</h1>
+  </div>
+
+  <!-- Main -->
+  <div class="prose w-full p-4">
+    <ul class="list-inside list-disc">
+      {
+        recipes.map((recipe) => (
+          <li>
+            <a href={`/recipes/${recipe.slug}`} class="text-blue-500">
+              {recipe.data.title || recipe.slug}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

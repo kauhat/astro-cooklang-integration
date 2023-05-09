@@ -17,11 +17,11 @@ export interface AstroCooklangConfig {
 }
 
 export interface CooklangInstance<T extends Record<string, any>> {
-  cookwares: object,
-  ingredients: object,
-  metadata: object,
-  shoppingList: object,
-  steps: object,
+  cookwares: object;
+  ingredients: object;
+  metadata: object;
+  shoppingList: object;
+  steps: object;
 
   /** Component to render content in `.astro` files. Usage: `<Content />` */
   Content: AstroComponentFactory;
@@ -222,9 +222,11 @@ export default function cooklangIntegration(
       "astro:config:setup": async (params) => {
         const {
           addContentEntryType,
-          //addPageExtension
-          //updateConfig,
+          // config,
+          // updateConfig,
         } = params as SetupHookParams;
+
+        // console.log(config)
 
         addContentEntryType({
           extensions: [".cook"],

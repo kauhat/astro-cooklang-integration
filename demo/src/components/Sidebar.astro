@@ -17,7 +17,7 @@ const categories = [
     {
       recipes.map((recipe) => (
         <li>
-          <a href={`/${recipe.slug}`} class="text-blue-500">
+          <a href={`/recipes/${recipe.slug}`} class="text-blue-500">
             {recipe.data.title || recipe.slug}
           </a>
         </li>
@@ -28,6 +28,14 @@ const categories = [
   <h1 class="mb-4 text-lg font-semibold">Categories</h1>
 
   <ul class="flex flex-col overflow-hidden">
-    {categories.map((category) => <li>{category}</li>)}
+    {
+      categories.map((category) => (
+        <li>
+          <a href={`/categories/${category}`} class="text-blue-500">
+            {category}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
