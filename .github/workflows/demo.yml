@@ -16,9 +16,9 @@ jobs:
       - name: Install devenv.sh
         run: nix profile install github:cachix/devenv/latest
         shell: sh
-      - run: devenv ci
-      - run: devenv shell pnpm install
-      - run: devenv shell buildPackage && buildDemo
+      - run: nix develop --impure -c pnpm install
+      - run: nix develop --impure -c build-package
+      - run: nix develop --impure -c build-demo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
