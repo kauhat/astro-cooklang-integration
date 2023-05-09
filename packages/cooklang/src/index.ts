@@ -1,8 +1,8 @@
 import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
 import type { LoadResult, SourceDescription } from "rollup";
 import z from "zod";
+import type { AstroComponentFactory } from "astro/dist/runtime/server";
 import type {
-  AstroConfig,
   AstroIntegration,
   ContentEntryModule,
   ContentEntryType,
@@ -14,6 +14,18 @@ type ContentTemplate = void;
 
 export interface AstroCooklangConfig {
   contentTemplate?: ContentTemplate;
+}
+
+export interface CooklangInstance<T extends Record<string, any>> {
+  cookwares: object,
+  ingredients: object,
+  metadata: object,
+  shoppingList: object,
+  steps: object,
+
+  /** Component to render content in `.astro` files. Usage: `<Content />` */
+  Content: AstroComponentFactory;
+  default: AstroComponentFactory;
 }
 
 //
@@ -38,7 +50,6 @@ type SetupHookParams = HookParameters<"astro:config:setup"> & {
   // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
   // "`contentEntryType` is not a public API"
   addContentEntryType: (contentEntryType: ContentEntryType) => void;
-  addPageExtension: (extension: string) => void;
 };
 
 //
@@ -71,13 +82,20 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
   // Extract parts.
   const { ingredients, cookwares, metadata, steps, shoppingList } = recipe;
 
+  // TODO: Attempt to deserialize metadata into collection's schema format as
+  //       defined in the content config.
+  //
+  // https://github.com/kauhat/astro-cooklang-integration/issues/7
+
   // TODO: Find images matching recipe name fitting spec conventions.
   //
   // I don't think we'll be able to use `getImageURL()` here, we probably need
   // to search the content directory for multiple image extensions.
   //
   // https://cooklang.org/docs/spec/#adding-pictures
-  // https://cooklang.github.io/cooklang-ts/modules.html#getImageURL
+  // https://cooklang.github.io/cooklang-ts/modules.html#getImageURL.
+  //
+  // https://github.com/kauhat/astro-cooklang-integration/issues/3
 
   const data = {
     // Add recipe metadata properties as top level.
@@ -142,7 +160,7 @@ const raw = ${JSON.stringify(body)}
 /**
  * Parsed recipe data.
  */
-const {
+export const {
   cookwares,
   ingredients,
   metadata,
@@ -183,8 +201,11 @@ export default Content
 const contentTypesTemplate = `
 declare module 'astro:content' {
   interface Render {
+    // TODO: Does this work?
+    '.cook': Promise<import('astro-cooklang').CooklangInstance>;1
+
     // '.cook': Promise<{
-    //   Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+    //   Content(props: Record<string, any>): import('astro-cooklang').CooklangInstance<{}>['Content'];
     // }>;
   }
 }`;

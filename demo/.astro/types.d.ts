@@ -1,8 +1,10 @@
 
 declare module 'astro:content' {
   interface Render {
+    '.cook': Promise<import('astro-cooklang').CooklangInstance>;
+
     // '.cook': Promise<{
-    //   Content(props: Record<string, any>): import('astro').MarkdownInstance<{}>['Content'];
+    //   Content(props: Record<string, any>): import('astro-cooklang').CooklangInstance<{}>['Content'];
     // }>;
   }
 }
