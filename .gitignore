@@ -9,6 +9,6 @@ yarn-error.log*
 .DS_Store
 
 # Devenv
+.direnv
 .devenv*
 devenv.local.nix
-

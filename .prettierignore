@@ -4,6 +4,8 @@
 # Directories
 .vscode
 .astro
+.devenv
+.direnv
 
 # Files
 pnpm-lock.yaml
