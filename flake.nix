@@ -28,6 +28,7 @@
                     pkgs.git
                     pkgs.nodejs-16_x
                     pkgs.nodePackages.pnpm
+                    pkgs.netlify-cli
                   ];
 
                   # https://devenv.sh/scripts/

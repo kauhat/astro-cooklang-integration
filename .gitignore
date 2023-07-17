@@ -12,3 +12,6 @@ yarn-error.log*
 .direnv
 .devenv*
 devenv.local.nix
+
+# Local Netlify folder
+.netlify
