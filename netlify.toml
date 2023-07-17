@@ -1,3 +1,8 @@
 [build]
   # command = "pnpm run build"
-  base = "demo/"
+  # base = "demo/"
+  command = "pnpm run demo:build"
+  publish = "demo/dist/"
+
+[build.environment]
+  NODE_ENV = "development"
