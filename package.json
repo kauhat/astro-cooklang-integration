@@ -8,16 +8,16 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm -C ./packages/cooklang run build",
+    "build": "yarn --cwd ./packages/cooklang run build",
     "dev": "pnpm run build -w",
     "pretty": "prettier --plugin-search-dir=./ -w ./",
-    "release": "pnpm -C ./packages/cooklang publish",
+    "release": "yarn --cwd ./packages/cooklang publish",
     "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
     "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
     "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-    "demo:build": "pnpm run build; pnpm -C ./demo run build",
-    "demo:serve": "pnpm -C ./demo run serve",
-    "demo:start": "pnpm -C ./demo run start"
+    "demo:build": "pnpm run build; yarn --cwd ./demo run build",
+    "demo:serve": "yarn --cwd ./demo run serve",
+    "demo:start": "yarn --cwd ./demo run start"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
@@ -26,5 +26,6 @@
     "prettier-plugin-astro": "^0.8.0",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "typescript": "^5.1.6"
-  }
+  },
+  "version": "0.0.0"
 }
