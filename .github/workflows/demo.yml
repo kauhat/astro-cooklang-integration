@@ -16,7 +16,7 @@ jobs:
       - name: Install devenv.sh
         run: nix profile install tarball+https://install.devenv.sh/latest
         shell: sh
-      - run: nix develop --impure -c pnpm install
+      - run: nix develop --impure -c pnpm install -r
       - run: nix develop --impure -c build-package
       - run: nix develop --impure -c build-demo
       - name: Upload artifact
