@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@trivago/prettier-plugin-sort-imports': ^4.1.1
-      astro: ^2.4.3
+      astro: 2.4.3
       prettier: ^2.8.8
       prettier-plugin-astro: ^0.8.0
       prettier-plugin-tailwindcss: ^0.2.8
@@ -22,7 +22,7 @@ importers:
     specifiers:
       '@astrojs/tailwind': ^3.1.2
       '@tailwindcss/typography': ^0.5.9
-      astro: ^2.4.3
+      astro: 2.4.3
       astro-cooklang: workspace:*
       tailwindcss: ^3.3.2
     dependencies:
@@ -35,7 +35,7 @@ importers:
   packages/cooklang:
     specifiers:
       '@cooklang/cooklang-ts': ^1.2.4
-      astro: ^2.4.3
+      astro: 2.4.3
       gray-matter: ^4.0.3
       rimraf: ^3.0.2
       vite: ^4.3.5
