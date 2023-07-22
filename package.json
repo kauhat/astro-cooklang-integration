@@ -2,26 +2,25 @@
   "name": "astro-cooklang.root",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@7.14.2",
   "workspaces": [
     "demo",
     "packages/*"
   ],
   "scripts": {
     "build": "yarn --cwd ./packages/cooklang run build",
-    "dev": "pnpm run build -w",
+    "dev": "yarn run build -w",
     "pretty": "prettier --plugin-search-dir=./ -w ./",
     "release": "yarn --cwd ./packages/cooklang publish",
-    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-    "demo:build": "pnpm run build; yarn --cwd ./demo run build",
+    "bump:major": "yarn --git-tag-version false version major && yarn --git-tag-version false version major",
+    "bump:minor": "yarn --git-tag-version false version minor && yarn --git-tag-version false version minor",
+    "bump:patch": "yarn --git-tag-version false version patch && yarn --git-tag-version false version patch",
+    "demo:build": "yarn run build; yarn --cwd ./demo run build",
     "demo:serve": "yarn --cwd ./demo run serve",
     "demo:start": "yarn --cwd ./demo run start"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "astro": "^2.4.3",
+    "astro": "2.4.3",
     "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.8.0",
     "prettier-plugin-tailwindcss": "^0.2.8",

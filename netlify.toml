@@ -1,7 +1,7 @@
 [build]
-  # command = "pnpm run build"
+  # command = "yarn run build"
   # base = "demo/"
-  command = "pnpm install -r -D; pnpm run demo:build"
+  command = "yarn install -r -D; yarn run demo:build"
   publish = "demo/dist/"
 
 [build.environment]

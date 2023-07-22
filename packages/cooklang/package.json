@@ -38,7 +38,7 @@
     "@cooklang/cooklang-ts": "^1.2.4"
   },
   "devDependencies": {
-    "astro": "^2.4.3",
+    "astro": "2.4.3",
     "gray-matter": "^4.0.3",
     "rimraf": "^3.0.2",
     "vite": "^4.3.5",

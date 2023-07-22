@@ -1,3 +1,11 @@
 [build]
-  command = "pnpm -C ../ run build && pnpm run build"
+  command = "yarn --cwd ../ run build && yarn run build"
   publish = "dist/"
+
+[build.environment]
+  NODE_ENV = "development"
+
+[[redirects]]
+  from = "/*"
+  to = "index.html"
+  status = 200

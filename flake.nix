@@ -27,13 +27,13 @@
                   packages = [
                     pkgs.git
                     pkgs.nodejs-16_x
-                    pkgs.nodePackages.pnpm
+                    pkgs.nodePackages.yarn
                     pkgs.netlify-cli
                   ];
 
                   # https://devenv.sh/scripts/
-                  scripts.build-package.exec = "pnpm -w run build $1";
-                  scripts.build-demo.exec = "pnpm -w run demo:build $1";
+                  scripts.build-package.exec = "yarn -w run build $1";
+                  scripts.build-demo.exec = "yarn -w run demo:build $1";
 
                   enterShell = ''
                     git --version
