@@ -17,7 +17,7 @@ const categories = [
     {
       recipes.map((recipe) => (
         <li>
-          <a href={`${Astro.site}/recipes/${recipe.slug}`} class="text-blue-500">
+          <a href={`${import.meta.env.BASE_URL}/recipes/${recipe.slug}`} class="text-blue-500">
             {recipe.data.title || recipe.slug}
           </a>
         </li>
@@ -31,7 +31,7 @@ const categories = [
     {
       categories.map((category) => (
         <li>
-          <a href={`${Astro.site}/categories/${category}`} class="text-blue-500">
+          <a href={`${import.meta.env.BASE_URL}/categories/${category}`} class="text-blue-500">
             {category}
           </a>
         </li>

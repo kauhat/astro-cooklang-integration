@@ -21,7 +21,7 @@ console.log(import.meta.env)
   <body class="flex min-h-screen overflow-y-scroll bg-indigo-50">
     <div class="container mx-auto flex flex-col">
       <header class="px-4 pt-6">
-        <a href=`${Astro.site}/`>
+        <a href=`${import.meta.env.BASE_URL}/`>
           <h1 class="text-2xl font-semibold">Astro Cooklang Cookbook</h1>
         </a>
       </header>
