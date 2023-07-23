@@ -22,7 +22,7 @@ jobs:
         shell: sh
 
       - name: Install dependencies
-        run: nix develop --impure -c pnpm install -r
+        run: nix develop --impure -c pnpm install -r --shamefully-hoist
 
       - name: Build package
         run: nix develop --impure -c build-package
