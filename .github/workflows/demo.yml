@@ -66,10 +66,10 @@ jobs:
         run: pnpm install -r
 
       - name: Build package
-        run: nix develop --impure -c build-package
+        run: pnpm -C ./packages/cooklang run build"
 
       - name: Build demo site
-        run: nix develop --impure -c build-demo
+        run: pnpm -C ./demo run build"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
