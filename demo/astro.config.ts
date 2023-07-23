@@ -8,7 +8,7 @@ console.log({baseUrl, env: import.meta.env})
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kauhat.github.io/astro-cooklang-integration/", // baseUrl,
+  site: baseUrl,
 
   integrations: [
     cooklang(),

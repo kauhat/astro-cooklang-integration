@@ -15,14 +15,13 @@ console.log(import.meta.env)
     <title>{title}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <base href={import.meta.env.PUBLIC_BASE_URL} />
-    <base href={Astro.site?.toJSON()} />
+    <base href={Astro.site?.toString()} />
   </head>
 
   <body class="flex min-h-screen overflow-y-scroll bg-indigo-50">
     <div class="container mx-auto flex flex-col">
       <header class="px-4 pt-6">
-        <a href="/">
+        <a href=`${Astro.site}/`>
           <h1 class="text-2xl font-semibold">Astro Cooklang Cookbook</h1>
         </a>
       </header>
