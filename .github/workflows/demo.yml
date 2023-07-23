@@ -74,7 +74,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install -r
+        run: pnpm install -r --shamefully-hoist
 
       - name: Build package
         run: pnpm -C ./packages/cooklang run build
