@@ -14,8 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VITE_BASE_URL: "https://kauhat.github.io/astro-cooklang-integration"
-      # VITE_BASE_URL: "https://kauhat.github.io/astro-cooklang-integration/${{ github.ref_name }}"
+      VITE_BASE_PATH: "/astro-cooklang-integration"
 
     steps:
       - name: Checkout
