@@ -15,6 +15,8 @@ console.log(import.meta.env)
     <title>{title}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href={import.meta.env.PUBLIC_BASE_URL} />
+    <base href={Astro.site} />
   </head>
 
   <body class="flex min-h-screen overflow-y-scroll bg-indigo-50">
