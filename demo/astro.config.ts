@@ -2,14 +2,14 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import cooklang from "astro-cooklang";
 
-const baseUrl = import.meta.env.VITE_BASE_URL as string || undefined;
+const baseUrlPath = import.meta.env.PUBLIC_BASE_PATH as string;
 
-console.log({baseUrl, env: import.meta.env})
+console.log({baseUrlPath, env: import.meta.env})
 
 // https://astro.build/config
 export default defineConfig({
-  // site: baseUrl,
-  base: '/astro-cooklang-integration',
+  base: baseUrlPath,
+  trailingSlash: 'never',
 
   integrations: [
     cooklang(),
