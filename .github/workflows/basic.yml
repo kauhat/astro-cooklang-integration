@@ -1,4 +1,4 @@
-name: "Deploy demo site"
+name: "Build pacakge and demo site, deploy to GH Pages"
 
 on:
   pull_request:
