@@ -1,0 +1,14 @@
+name: "Publish pacakge to NPM"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/basic.yml
+    steps:
+      - run: pnpm publish --dry-run -w ./packages/cooklang
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
