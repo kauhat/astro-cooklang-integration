@@ -5,6 +5,7 @@
     devenv.url = "github:cachix/devenv";
   };
 
+  # TODO: Add library and demo site builds to outputs.
   outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
