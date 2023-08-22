@@ -68,6 +68,8 @@ type EntryInfoOutput = {
   slug: string;
 };
 
+const loadedRecipesMap = new Map();
+
 /**
  * Load recipe from file contents and extract data.
  *
@@ -78,6 +80,9 @@ type EntryInfoOutput = {
 function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
   // Parse the recipe...
   const recipe = new Recipe(contents);
+
+  // Set up recipe in loaded map for use in render module.
+  loadedRecipesMap.set(fileUrl.toString(), recipe);
 
   // Extract parts.
   const { ingredients, cookwares, metadata, steps, shoppingList } = recipe;
@@ -126,7 +131,8 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
 //
 
 type RenderModuleInput = {
-  entry: ContentEntryModule;
+  contents: string;
+  fileUrl: URL;
   viteId: string;
 };
 
@@ -140,11 +146,22 @@ type RenderModuleOutput = SourceDescription & { [additonal: string]: any };
  * @see https://docs.astro.build/en/reference/api-reference/#collection-entry-type
  */
 async function getRenderModule({
+  contents,
+  fileUrl,
   viteId,
-  entry,
 }: RenderModuleInput): Promise<RenderModuleOutput> {
-  const { body, data } = entry;
-  const { cookwares, ingredients, metadata, shoppingList, steps } = data;
+  // Recipe should be loaded in entry step.
+  const recipe = loadedRecipesMap.get(fileUrl.toString());
+
+  if (!recipe) {
+    throw new ReferenceError(`Recipe not loaded "${fileUrl.toString()}"`, {
+      cause: fileUrl.toString(),
+    });
+  }
+
+  // Extract recipe parts...
+  const { body } = recipe;
+  const { cookwares, ingredients, metadata, shoppingList, steps } = recipe;
 
   const code = `
 import { jsx as h } from "astro/jsx-runtime";
@@ -214,19 +231,13 @@ declare module 'astro:content' {
  * Our main Astro integration...
  */
 export default function cooklangIntegration(
-  inputConfig: AstroCooklangConfig = {}
+  inputConfig: AstroCooklangConfig = {},
 ): AstroIntegration {
   return {
     name: "@astrojs/cooklang",
     hooks: {
       "astro:config:setup": async (params) => {
-        const {
-          addContentEntryType,
-          // config,
-          // updateConfig,
-        } = params as SetupHookParams;
-
-        // console.log(config)
+        const { addContentEntryType } = params as SetupHookParams;
 
         addContentEntryType({
           extensions: [".cook"],
