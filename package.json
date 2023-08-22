@@ -9,7 +9,7 @@
   "scripts": {
     "build": "pnpm -C ./packages/cooklang run build",
     "dev": "pnpm run build -w",
-    "pretty": "prettier --plugin-search-dir=./ -w ./",
+    "pretty": "prettier -w ./",
     "release": "pnpm -C ./packages/cooklang publish",
     "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
     "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
