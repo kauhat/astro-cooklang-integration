@@ -1,4 +1,4 @@
-name: "Build pacakge and demo site (Nix)"
+name: "Build package and demo site (Nix)"
 
 on:
   pull_request:
