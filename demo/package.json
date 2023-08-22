@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/tailwind": "^3.1.2",
+    "@astrojs/tailwind": "^4.0.0",
     "@tailwindcss/typography": "^0.5.9",
-    "astro": "2.4.3",
-    "astro-cooklang": "workspace:*",
-    "tailwindcss": "^3.3.2"
+    "astro": "2.10.12",
+    "astro-cooklang": "workspace:0.0.1-alpha1",
+    "tailwindcss": "^3.3.3"
   }
 }
