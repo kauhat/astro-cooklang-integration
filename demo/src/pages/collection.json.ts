@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 
-export async function get() {
+export async function GET() {
   const posts = await getCollection("recipes");
 
   return {

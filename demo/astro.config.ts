@@ -4,13 +4,9 @@ import cooklang from "astro-cooklang";
 
 const baseUrlPath = import.meta.env.VITE_BASE_PATH as string;
 
-
 // https://astro.build/config
 export default defineConfig({
   base: baseUrlPath,
 
-  integrations: [
-    cooklang(),
-    tailwind({ configFile: "tailwind.config.cjs" }),
-  ],
+  integrations: [cooklang(), tailwind({ configFile: "tailwind.config.cjs" })],
 });

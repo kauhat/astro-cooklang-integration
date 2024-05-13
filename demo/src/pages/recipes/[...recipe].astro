@@ -2,6 +2,8 @@
 import { Debug } from "astro/components";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+// import Ingredients from "astro-cooklang/RecipeIngredients.astro";
+// import Steps from "astro-cooklang/RecipeSteps.astro";
 
 export async function getStaticPaths() {
   const recipeEntries = await getCollection("recipes");
@@ -38,7 +40,9 @@ const debug = { id, slug, metadata };
 
   <!-- Main -->
   <div class="prose w-full p-4">
-    <Content />
+    <!-- <Content /> -->
+    <!-- <Ingredients  >
+    <Steps> -->
   </div>
 
   <footer class="mt-auto p-4 text-center">

@@ -16,8 +16,14 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./Renderer.astro": {
-      "default": "./src/components/Renderer.astro"
+    "./ContentRenderer.astro": {
+      "default": "./src/components/ContentRenderer.astro"
+    },
+    "./RecipeIngredients.astro": {
+      "default": "./src/components/RecipeIngredients.astro"
+    },
+    "./RecipeSteps.astro": {
+      "default": "./src/components/RecipeSteps.astro"
     }
   },
   "files": [
@@ -35,16 +41,16 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@cooklang/cooklang-ts": "^1.2.4"
+    "@cooklang/cooklang-ts": "^1.2.6"
   },
   "devDependencies": {
-    "astro": "2.10.12",
+    "astro": "3.4.3",
     "gray-matter": "^4.0.3",
-    "rimraf": "^5.0.1",
-    "rollup": "^3.28.1",
-    "vite": "^4.4.9",
-    "vitest": "^0.34.2",
-    "zod": "^3.22.2"
+    "rimraf": "^5.0.5",
+    "rollup": "^4.17.2",
+    "vite": "^4.5.3",
+    "vitest": "^0.34.6",
+    "zod": "^3.23.7"
   },
   "peerDependencies": {
     "astro": "^2.2.0"
