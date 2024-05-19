@@ -1,7 +1,7 @@
 import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
-import type { LoadResult, SourceDescription } from "rollup";
+import type { LoadResult, SourceDescription, TransformResult } from "rollup";
 import z from "zod";
-import type { AstroComponentFactory } from "astro/dist/runtime/server";
+// import type { AstroComponentFactory } from "astro/dist/runtime/server";
 import type {
   AstroIntegration,
   ContentEntryModule,
@@ -23,10 +23,6 @@ export interface CooklangInstance<T extends Record<string, any>> {
   metadata: object;
   shoppingList: object;
   steps: object;
-
-  /** Component to render content in `.astro` files. Usage: `<Content />` */
-  Content: AstroComponentFactory;
-  default: AstroComponentFactory;
 }
 
 //
@@ -147,7 +143,6 @@ type RenderModuleOutput = SourceDescription & { [additonal: string]: any };
  * Output is used to build the collection entry item.
  *
  * @see https://docs.astro.build/en/reference/api-reference/#collection-entry-type
- * @deprecated
  */
 async function getRenderModule({
   contents,
@@ -211,7 +206,7 @@ export default Content
   console.log({ code });
 
   return {
-    code: "",
+    code,
     vite: {
       lang: "ts",
     },
@@ -253,8 +248,8 @@ export default function cooklangIntegration(
         addContentEntryType({
           extensions: [".cook"],
           getEntryInfo,
-          // getRenderModule,
-          // contentModuleTypes: contentTypesTemplate,
+          getRenderModule,
+          contentModuleTypes: contentTypesTemplate,
           // handlePropagation: false,
         });
 
@@ -283,12 +278,13 @@ export default function cooklangIntegration(
                   // Resolve the imported path.
                   const [path, _query] = id.split("?", 2);
 
+                  const code = "";
                   // const code = sourceToJSONTransform(source, path, true);
                   // const code = sourceToRecipeTransform(source, path, true)
 
                   //
                   return {
-                    code: source,
+                    code,
                     map: null,
                     // deps: ['@cooklang/cooklang-ts'],
                     // dynamicDeps: ['@cooklang/cooklang-ts'],

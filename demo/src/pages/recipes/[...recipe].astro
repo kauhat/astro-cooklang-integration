@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { id, slug } = entry;
-const { Content } = await entry.render();
+// const { Content } = await entry.render();
 
 // You can access recipe data like this...
 const { ingredients, metadata } = entry.data;

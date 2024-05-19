@@ -44,13 +44,13 @@
     "@cooklang/cooklang-ts": "^1.2.6"
   },
   "devDependencies": {
-    "astro": "3.4.3",
+    "astro": "4.8.6",
     "gray-matter": "^4.0.3",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.7",
     "rollup": "^4.17.2",
-    "vite": "^4.5.3",
-    "vitest": "^0.34.6",
-    "zod": "^3.23.7"
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "astro": "^2.2.0"

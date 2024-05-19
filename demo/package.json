@@ -11,8 +11,8 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
     "@tailwindcss/typography": "^0.5.13",
-    "astro": "3.4.3",
-    "astro-cooklang": "workspace:0.0.1-alpha1",
+    "astro": "4.8.6",
+    "astro-cooklang": "workspace:*",
     "tailwindcss": "^3.4.3"
   }
 }
