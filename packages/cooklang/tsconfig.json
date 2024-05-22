@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["src"],
+  "include": ["components", "src"],
   "compilerOptions": {
     "target": "es2018",
     "noEmit": false,

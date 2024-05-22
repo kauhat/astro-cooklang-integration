@@ -1,9 +1,8 @@
 ---
 import { Debug } from "astro/components";
 import { getCollection } from "astro:content";
+import { Renderer } from "astro-cooklang/components";
 import Layout from "../../layouts/Layout.astro";
-// import Ingredients from "astro-cooklang/RecipeIngredients.astro";
-// import Steps from "astro-cooklang/RecipeSteps.astro";
 
 export async function getStaticPaths() {
   const recipeEntries = await getCollection("recipes");
@@ -12,7 +11,7 @@ export async function getStaticPaths() {
     return {
       params: {
         // e.g `spec/fried-rice`
-        recipe: entry.slug,
+        recipe: entry.id,
       },
       props: { entry },
     };
@@ -41,13 +40,12 @@ const debug = { id, slug, metadata };
   <!-- Main -->
   <div class="prose w-full p-4">
     <!-- <Content /> -->
-    <!-- <Ingredients  >
-    <Steps> -->
+    <Renderer {...entry.data} />
   </div>
 
   <footer class="mt-auto p-4 text-center">
     <p class="text-neutral-600">
-      Rendered with <code>&lt;Content /&gt;</code> component.
+      <code>import {Renderer} from "astro-cooklang/components";</code>
     </p>
   </footer>
 
@@ -66,7 +64,7 @@ const debug = { id, slug, metadata };
     <h3 class="m-4 text-lg font-semibold">Source (from collection entry)</h3>
 
     <div class="p-4 font-mono text-xs">
-      <span class="whitespace-pre-wrap">{entry.body}</span>
+      <span class="whitespace-pre-wrap">{JSON.stringify(entry)}</span>
     </div>
   </div>
 

@@ -5,7 +5,9 @@ const recipes = await getCollection("recipes");
 
 const categories = [
   ...new Set(
-    recipes.map((entry) => entry.data.category).filter((category) => !!category)
+    recipes
+      .map((entry) => entry.data.category)
+      .filter((category) => !!category),
   ),
 ];
 ---
@@ -17,8 +19,11 @@ const categories = [
     {
       recipes.map((recipe) => (
         <li>
-          <a href={`${import.meta.env.BASE_URL}recipes/${recipe.slug}`} class="text-blue-500">
-            {recipe.data.title || recipe.slug}
+          <a
+            href={`${import.meta.env.BASE_URL}recipes/${recipe.id}`}
+            class="text-blue-500"
+          >
+            {recipe.data.title || recipe.id}
           </a>
         </li>
       ))
@@ -31,7 +36,10 @@ const categories = [
     {
       categories.map((category) => (
         <li>
-          <a href={`${import.meta.env.BASE_URL}categories/${category}`} class="text-blue-500">
+          <a
+            href={`${import.meta.env.BASE_URL}categories/${category}`}
+            class="text-blue-500"
+          >
             {category}
           </a>
         </li>

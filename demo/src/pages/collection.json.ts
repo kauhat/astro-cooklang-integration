@@ -4,6 +4,6 @@ export async function GET() {
   const posts = await getCollection("recipes");
 
   return {
-    body: JSON.stringify(posts.map(({ render, ...entry }) => entry)),
+    body: JSON.stringify(posts.map(({ render = null, ...entry }) => entry)),
   };
 }
