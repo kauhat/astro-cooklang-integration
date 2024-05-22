@@ -3,7 +3,7 @@
   "include": ["src"],
   "compilerOptions": {
     "target": "es2018",
-    // "noEmit": false,
+    "noEmit": false,
     "outDir": "./dist",
     "declaration": true,
     "sourceMap": true
