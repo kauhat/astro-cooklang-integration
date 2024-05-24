@@ -1,7 +1,7 @@
 {
   "name": "astro-cooklang",
   "description": "Use Cooklang recipes within Astro",
-  "version": "0.0.1-alpha1",
+  "version": "0.0.1-alpha2",
   "author": "Jack Fletcher",
   "license": "MIT",
   "keywords": [
@@ -38,7 +38,7 @@
     "astro": "4.8.6",
     "gray-matter": "^4.0.3",
     "rimraf": "^5.0.7",
-    "rollup": "^4.17.2",
+    "rollup": "^4.18.0",
     "vite": "^5.2.11",
     "vitest": "^1.6.0",
     "zod": "^3.23.8"
