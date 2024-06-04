@@ -10,10 +10,11 @@
     "cooklang"
   ],
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "default": "./src/index.ts",
+      "types": "./dist/index.d.ts"
+    },
     "./components": "./components/index.ts"
   },
   "files": [
@@ -22,10 +23,10 @@
     "src"
   ],
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc",
     "coverage": "vitest run --coverage",
     "clean": "rimraf dist",
-    "dev": "tsc -w",
     "prebuild": "npm run clean",
     "postversion": "git push --follow-tags",
     "preversion": "npm run build",

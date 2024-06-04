@@ -7,8 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm -C ./packages/cooklang run build",
-    "dev": "pnpm run build -w",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
     "pretty": "prettier -w ./",
     "release": "pnpm -C ./packages/cooklang publish",
     "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
@@ -24,6 +25,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
+    "turbo": "^2.0.1",
     "typescript": "^5.4.5"
   }
 }

@@ -15,3 +15,5 @@ devenv.local.nix
 
 # Local Netlify folder
 .netlify
+
+.turbo
