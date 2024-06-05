@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["src"],
+  "include": ["src", "components"],
   // "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "declaration": true,
