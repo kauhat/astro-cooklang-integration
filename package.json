@@ -22,7 +22,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "astro": "4.8.6",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.1",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "turbo": "^2.0.1",
