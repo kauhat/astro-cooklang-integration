@@ -15,6 +15,6 @@
     "astro": "4.9.3",
     "astro-cooklang": "workspace:0.0.1-alpha2",
     "sharp": "^0.33.4",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.4"
   }
 }
