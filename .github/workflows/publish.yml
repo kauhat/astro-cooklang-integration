@@ -7,10 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     steps:
-      - name: Build output
-        uses: ./.github/workflows/basic.yml
+      - uses: ./.github/workflows/basic.yml
       - run: pnpm publish --dry-run -w ./packages/cooklang
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

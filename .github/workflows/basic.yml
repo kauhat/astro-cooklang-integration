@@ -10,65 +10,13 @@ permissions:
   id-token: write
 
 jobs:
-  install-and-build:
+  build:
     runs-on: ubuntu-latest
-
-    env:
-      VITE_BASE_PATH: "/astro-cooklang-integration"
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.10.0
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install -r --shamefully-hoist
-
-      - name: Build package
-        run: pnpm -C ./packages/cooklang run build
-
-      - name: Build demo site
-        run: pnpm -C ./demo run build
-
-      - name: Upload demo artifacts
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: "./demo/dist"
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: install-and-build
-
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - name: Run arbitrary commands
+        run: devbox run build
