@@ -6,7 +6,7 @@
   },
   "shell": {
     "init_hook": [
-      "pnpm install"
+      "pnpm install --recursive"
     ],
     "scripts": {
       "build": "pnpm run build",
