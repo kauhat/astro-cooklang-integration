@@ -1,5 +1,5 @@
 ---
-import { Debug } from "astro/components";
+import { Code, Debug } from "astro/components";
 import { getCollection } from "astro:content";
 import { Renderer } from "astro-cooklang/components";
 import Layout from "../../layouts/Layout.astro";
@@ -45,7 +45,10 @@ const debug = { id, slug, metadata };
 
   <footer class="mt-auto p-4 text-center">
     <p class="text-neutral-600">
-      <code>import {Renderer} from "astro-cooklang/components";</code>
+      <Code
+        code={'import {Renderer} from "astro-cooklang/components"'}
+        lang="ts"
+      />
     </p>
   </footer>
 
