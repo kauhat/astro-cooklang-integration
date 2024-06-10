@@ -1,13 +1,7 @@
-name: "Build package and demo site, deploy to GH Pages"
+name: "Build & test"
 
 on:
-  pull_request:
   push:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -16,7 +10,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install devbox
-        uses: jetify-com/devbox-install-action@v0.10.0
+        uses: jetify-com/devbox-install-action@v0.11.0
 
       - name: Run Turbo build
         run: devbox run build
+        with:
+          enable-cache: true

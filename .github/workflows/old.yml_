@@ -61,15 +61,15 @@ jobs:
         with:
           path: "./demo/dist"
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: install-and-build
+    deploy:
+      runs-on: ubuntu-latest
+      needs: install-and-build
 
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
+      environment:
+        name: github-pages
+        url: ${{steps.deployment.outputs.page_url}}
 
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v2
