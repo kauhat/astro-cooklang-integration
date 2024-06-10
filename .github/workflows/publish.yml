@@ -22,26 +22,30 @@ concurrency:
 
 jobs:
   build:
+    name: Build package and demo site
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Install devbox
         uses: jetify-com/devbox-install-action@v0.11.0
+        with:
+          enable-cache: true
 
       - name: Run Turbo build
         run: devbox run build
-        with:
-          enable-cache: true
 
       - name: Upload demo artifacts
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./demo/dist
 
-
   # Deploy job
   deploy:
+    name: Deploy demo site
+    runs-on: ubuntu-latest
+
     # Add a dependency to the build job
     needs: build
 
@@ -50,21 +54,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
-    runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install devbox
-        uses: jetify-com/devbox-install-action@v0.11.0
-
-      - name: Run Turbo build
-        run: devbox run build
-        with:
-          enable-cache: true
-
-      - name: Upload demo artifacts
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./demo/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
