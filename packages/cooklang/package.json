@@ -1,7 +1,7 @@
 {
   "name": "astro-cooklang",
   "description": "Use Cooklang recipes within Astro",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha2",
   "author": "Jack Fletcher",
   "license": "MIT",
   "keywords": [
@@ -10,43 +10,41 @@
     "cooklang"
   ],
   "type": "module",
-  "main": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./src/index.ts",
+      "types": "./dist/index.d.ts"
     },
-    "./Renderer.astro": {
-      "default": "./src/components/Renderer.astro"
-    }
+    "./components": "./components/index.ts"
   },
   "files": [
+    "components",
     "dist",
     "src"
   ],
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc",
     "coverage": "vitest run --coverage",
     "clean": "rimraf dist",
-    "dev": "tsc -w",
     "prebuild": "npm run clean",
     "postversion": "git push --follow-tags",
     "preversion": "npm run build",
     "test": "vitest"
   },
   "dependencies": {
-    "@cooklang/cooklang-ts": "^1.2.4"
+    "@cooklang/cooklang-ts": "^1.2.6"
   },
   "devDependencies": {
-    "astro": "2.4.3",
+    "astro": "4.10.0",
     "gray-matter": "^4.0.3",
-    "rimraf": "^3.0.2",
-    "rollup": "^3.26.3",
-    "vite": "^4.3.5",
-    "vitest": "^0.30.1",
-    "zod": "^3.21.4"
+    "rimraf": "^5.0.7",
+    "rollup": "^4.18.0",
+    "vite": "^5.2.12",
+    "vitest": "^1.6.0",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "astro": "^2.2.0"
+    "astro": "^2.5.0 || ^3.0.0 || ^4.0.0"
   }
 }

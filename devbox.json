@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.5/.schema/devbox.schema.json",
+  "packages": ["nodejs@latest"],
+  "env": {
+    "DEVBOX_COREPACK_ENABLED": "true"
+  },
+  "shell": {
+    "init_hook": ["pnpm install --recursive"],
+    "scripts": {
+      "build": "pnpm run build",
+      "test": ["echo \"Error: no test specified\" && exit 1"]
+    }
+  }
+}

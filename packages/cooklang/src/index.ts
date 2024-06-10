@@ -1,32 +1,13 @@
 import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
-import type { LoadResult, SourceDescription } from "rollup";
+// import type { LoadResult, SourceDescription, TransformResult } from "rollup";
 import z from "zod";
-import type { AstroComponentFactory } from "astro/dist/runtime/server";
 import type {
   AstroIntegration,
   ContentEntryModule,
   ContentEntryType,
+  DataEntryType,
   HookParameters,
 } from "astro";
-
-// TODO: Use template to render default content display.
-type ContentTemplate = void;
-
-export interface AstroCooklangConfig {
-  contentTemplate?: ContentTemplate;
-}
-
-export interface CooklangInstance<T extends Record<string, any>> {
-  cookwares: object;
-  ingredients: object;
-  metadata: object;
-  shoppingList: object;
-  steps: object;
-
-  /** Component to render content in `.astro` files. Usage: `<Content />` */
-  Content: AstroComponentFactory;
-  default: AstroComponentFactory;
-}
 
 //
 // Content schemas...
@@ -46,15 +27,16 @@ export const recipeSchema = {
 };
 
 //
+// Unoffical Astro API types...
+//
+
 type SetupHookParams = HookParameters<"astro:config:setup"> & {
   // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
   // "`contentEntryType` is not a public API"
+  addPageExtension: (extension: string) => void;
   addContentEntryType: (contentEntryType: ContentEntryType) => void;
+  addDataEntryType: (dataEntryType: DataEntryType) => void;
 };
-
-//
-// Setup entry data from files with .cook extension.
-//
 
 type EntryInfoInput = {
   fileUrl: URL;
@@ -67,6 +49,10 @@ type EntryInfoOutput = {
   body: string;
   slug: string;
 };
+
+//
+// Cooklang integration...
+//
 
 /**
  * Load recipe from file contents and extract data.
@@ -111,110 +97,21 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
   return {
     slug: metadata.slug,
     data,
-    body: contents, // Should we use body or rawData for the recipe source?
+    body: "", // Should we use body or rawData for the recipe source?
     rawData: contents,
   };
 }
 
-//
-// Using the data that was setup when handling the entry above, we generate a
-// module will allow us to display recipes in pages.
-//
-// The module returns a `<Content />` component.
-//
-// TODO: Allow content component to be customized. (see `ContentTemplate`)
-//
-
-type RenderModuleInput = {
-  entry: ContentEntryModule;
-  viteId: string;
-};
-
-type RenderModuleOutput = SourceDescription & { [additonal: string]: any };
-
 /**
- * Build a bundleable module from recipe entry data.
- *
- * Output is used to build the collection entry item.
- *
- * @see https://docs.astro.build/en/reference/api-reference/#collection-entry-type
+ * Integration settings...
  */
-async function getRenderModule({
-  viteId,
-  entry,
-}: RenderModuleInput): Promise<RenderModuleOutput> {
-  const { body, data } = entry;
-  const { cookwares, ingredients, metadata, shoppingList, steps } = data;
-
-  const code = `
-import { jsx as h } from "astro/jsx-runtime";
-
-// TODO: How can we load a user given renderer?
-import Renderer from 'astro-cooklang/Renderer.astro';
-
-/**
- * Source cooklang file.
- */
-const raw = ${JSON.stringify(body)}
-
-/**
- * Parsed recipe data.
- */
-export const {
-  cookwares,
-  ingredients,
-  metadata,
-  shoppingList,
-  steps,
-} = ${JSON.stringify({ cookwares, ingredients, metadata, shoppingList, steps })}
-
-/**
- * Use renderer component for file entry's <Content/> display.
- */
-export async function Content (props) {
-  return h(
-    Renderer,
-    {
-      raw,
-
-      ingredients,
-      cookwares,
-      metadata,
-      steps,
-      shoppingList,
-    }
-  );
-}
-
-export default Content
-`;
-
-  return {
-    code,
-    vite: {
-      lang: "ts",
-    },
-  };
-}
-
-// Types for the render module's Content component.
-const contentTypesTemplate = `
-declare module 'astro:content' {
-  interface Render {
-    // TODO: Does this work?
-    '.cook': Promise<import('astro-cooklang').CooklangInstance>;1
-
-    // '.cook': Promise<{
-    //   Content(props: Record<string, any>): import('astro-cooklang').CooklangInstance<{}>['Content'];
-    // }>;
-  }
-}`;
+export interface AstroCooklangConfig {}
 
 /**
  * Our main Astro integration...
  */
 export default function cooklangIntegration(
-  inputConfig: AstroCooklangConfig = {}
+  inputConfig: AstroCooklangConfig = {},
 ): AstroIntegration {
   return {
     name: "@astrojs/cooklang",
@@ -222,18 +119,51 @@ export default function cooklangIntegration(
       "astro:config:setup": async (params) => {
         const {
           addContentEntryType,
-          // config,
-          // updateConfig,
+          addPageExtension,
+          addDataEntryType,
+          updateConfig,
         } = params as SetupHookParams;
 
-        // console.log(config)
+        addPageExtension(".cook");
 
-        addContentEntryType({
+        addDataEntryType({
           extensions: [".cook"],
           getEntryInfo,
-          getRenderModule,
-          contentModuleTypes: contentTypesTemplate,
         });
+
+        // updateConfig({
+        //   vite: {
+        //     /** @type {import('vite').Plugin[]} */
+        //     plugins: [
+        //       {
+        //         name: "cooklang-loader",
+        //         enforce: "pre",
+
+        //         transform(source: string, id: string): TransformResult | null {
+        //           // Check the file name contains ".cook" extension.
+        //           if (!id.endsWith(".cook")) {
+        //             return null;
+        //           }
+
+        //           // Resolve the imported path.
+        //           const [path, _query] = id.split("?", 2);
+
+        //           const code = "";
+        //           // const code = sourceToJSONTransform(source, path, true);
+        //           // const code = sourceToRecipeTransform(source, path, true)
+
+        //           //
+        //           return {
+        //             code,
+        //             map: null,
+        //             // deps: ['@cooklang/cooklang-ts'],
+        //             // dynamicDeps: ['@cooklang/cooklang-ts'],
+        //           };
+        //         },
+        //       },
+        //     ],
+        //   },
+        // });
       },
     },
   };

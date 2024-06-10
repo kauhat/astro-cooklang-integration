@@ -1,11 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": ["src"],
+  "include": ["src", "components"],
+  // "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "target": "es2018",
-    "noEmit": false,
-    "outDir": "dist",
     "declaration": true,
-    "sourceMap": true
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "./dist"
+    // "target": "es2018",
+    // "sourceMap": true
   }
 }
