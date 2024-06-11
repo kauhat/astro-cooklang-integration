@@ -6,14 +6,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "pretty": "prettier -w ./",
-    "release": "pnpm -C ./packages/cooklang publish",
-    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-    "demo:build": "pnpm run build; pnpm -C ./demo run build",
-    "demo:serve": "pnpm -C ./demo run serve",
-    "demo:start": "pnpm -C ./demo run start"
+    "pretty": "prettier -w ./"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
