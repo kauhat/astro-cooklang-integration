@@ -7,6 +7,7 @@
   "shell": {
     "init_hook": ["pnpm install --recursive"],
     "scripts": {
+      "dev": "pnpm run dev",
       "build": "pnpm run build",
       "test": ["echo \"Error: no test specified\" && exit 1"]
     }
