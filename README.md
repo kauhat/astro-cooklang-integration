@@ -94,7 +94,7 @@ const { Content } = await entry.render();
 <Content />
 ```
 
-See the [demo site](./demo) for an example Astro site using this integration.
+See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an example of an Astro site using this integration.
 
 ## TODO
 
@@ -118,5 +118,5 @@ See the [demo site](./demo) for an example Astro site using this integration.
 [npm-version-href]: https://npmjs.com/package/astro-cooklang
 [npm-downloads-src]: https://img.shields.io/npm/dm/astro-cooklang?style=flat-square
 [npm-downloads-href]: https://npmjs.com/package/astro-cooklang
-[github-actions-src]: https://img.shields.io/github/actions/workflow/status/kauhat/astro-cooklang-integration/ci.yml?branch=main&style=flat-square
+[github-actions-src]: https://img.shields.io/github/actions/workflow/status/kauhat/astro-cooklang-integration/publish.yml?branch=main&style=flat-square
 [github-actions-href]: https://github.com/kauhat/astro-cooklang-integration/actions?query=workflow%3Aci
