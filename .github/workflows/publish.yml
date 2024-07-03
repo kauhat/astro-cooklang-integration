@@ -44,7 +44,7 @@ jobs:
         with:
           path: ./demo/dist
 
-  # Deploy job
+  # Deploy demo site
   deploy:
     name: Deploy demo site
     runs-on: ubuntu-latest
@@ -61,3 +61,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+  # Publish
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+
+    # Add a dependency to the build job
+    needs: build
+
+    steps:
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
