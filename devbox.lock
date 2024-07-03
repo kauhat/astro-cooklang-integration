@@ -1,6 +1,78 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "git@latest": {
+      "last_modified": "2024-06-20T08:04:27Z",
+      "resolved": "github:NixOS/nixpkgs/9b10b8f00cb5494795e5f51b39210fed4d2b0748#git",
+      "source": "devbox-search",
+      "version": "2.45.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/lfg94jm4cgdnviyzfb4qi5dl94ivf3qk-git-2.45.1",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/fx9bjrg4vgkkb04pbiq3pisxj4aippxk-git-2.45.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/lfg94jm4cgdnviyzfb4qi5dl94ivf3qk-git-2.45.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ndw4d3hgsy7d7dfg2z7a5q2amin2d9r5-git-2.45.1",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/srka3qivr7p6dbfppz40hqapvzs1pnff-git-2.45.1-debug"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/5yz7i6i36crczabprnmcql484bs9bpcp-git-2.45.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/ndw4d3hgsy7d7dfg2z7a5q2amin2d9r5-git-2.45.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/5hkhxkqzwyak9ji766885jm98pgkxxjx-git-2.45.1",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/f41zpwrc7ddprr9mydn8j00vsbvs3z63-git-2.45.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/5hkhxkqzwyak9ji766885jm98pgkxxjx-git-2.45.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/jsbha1gg6lzzj7icrg3h0npgm8vwf80c-git-2.45.1",
+              "default": true
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/4r2pm5la8w0zl12lqf6lwg8ycq28jbll-git-2.45.1-debug"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/ba7r274fm1v4r9zfgjr4qfsby1hxikgc-git-2.45.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/jsbha1gg6lzzj7icrg3h0npgm8vwf80c-git-2.45.1"
+        }
+      }
+    },
     "nodejs@latest": {
       "last_modified": "2024-05-22T06:18:38Z",
       "plugin_version": "0.0.2",
