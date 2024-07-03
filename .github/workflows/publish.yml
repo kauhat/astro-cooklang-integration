@@ -33,6 +33,9 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Install dependencies
+        run: devbox run install
+
       - name: Run Turbo build
         run: devbox run build
 
