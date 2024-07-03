@@ -33,6 +33,9 @@ jobs:
         with:
           enable-cache: true
 
+      - name: Install dependencies
+        run: devbox run install
+
       - name: Run Turbo build
         run: devbox run build
 
@@ -41,7 +44,7 @@ jobs:
         with:
           path: ./demo/dist
 
-  # Deploy job
+  # Deploy demo site
   deploy:
     name: Deploy demo site
     runs-on: ubuntu-latest
@@ -58,3 +61,21 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+  # Publish
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+
+    # Add a dependency to the build job
+    needs: build
+
+    steps:
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

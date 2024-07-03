@@ -9,6 +9,7 @@
     "pretty": "prettier -w ./"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "astro": "4.10.0",
     "prettier": "^3.3.1",
