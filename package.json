@@ -6,7 +6,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "pretty": "prettier -w ./"
+    "pretty": "prettier -w ./",
+    "version": "changeset version && pnpm install --no-frozen-lockfile"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
