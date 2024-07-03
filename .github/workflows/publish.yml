@@ -70,6 +70,9 @@ jobs:
     # Add a dependency to the build job
     needs: build
 
+    permissions:
+      contents: write
+
     steps:
       - name: Create Release Pull Request or Publish to npm
         id: changesets
