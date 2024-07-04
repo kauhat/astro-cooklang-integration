@@ -1,6 +1,7 @@
 {
   "name": "astro-cooklang",
   "description": "Use Cooklang recipes within Astro",
+  "homepage": "https://astro-cooklang.kauh.at/",
   "author": "Jack Fletcher",
   "license": "MIT",
   "keywords": [
