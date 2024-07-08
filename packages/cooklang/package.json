@@ -1,7 +1,8 @@
 {
   "name": "astro-cooklang",
   "description": "Use Cooklang recipes within Astro",
-  "version": "0.0.1-alpha1",
+  "homepage": "https://astro-cooklang.kauh.at/",
+  "version": "0.0.1-alpha2",
   "author": "Jack Fletcher",
   "license": "MIT",
   "keywords": [
@@ -10,49 +11,45 @@
     "cooklang"
   ],
   "type": "module",
-  "main": "./dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./src/index.ts",
+      "types": "./dist/index.d.ts"
     },
-    "./ContentRenderer.astro": {
-      "default": "./src/components/ContentRenderer.astro"
-    },
-    "./RecipeIngredients.astro": {
-      "default": "./src/components/RecipeIngredients.astro"
-    },
-    "./RecipeSteps.astro": {
-      "default": "./src/components/RecipeSteps.astro"
-    }
+    "./components": "./components/index.ts"
   },
   "files": [
+    "components",
     "dist",
     "src"
   ],
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc",
     "coverage": "vitest run --coverage",
     "clean": "rimraf dist",
-    "dev": "tsc -w",
     "prebuild": "npm run clean",
     "postversion": "git push --follow-tags",
     "preversion": "npm run build",
-    "test": "vitest"
+    "test": "vitest",
+    "release": "pnpm publish",
+    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
+    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
+    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch"
   },
   "dependencies": {
     "@cooklang/cooklang-ts": "^1.2.6"
   },
   "devDependencies": {
-    "astro": "4.8.6",
+    "astro": "4.10.0",
     "gray-matter": "^4.0.3",
-    "rimraf": "^5.0.7",
-    "rollup": "^4.17.2",
-    "vite": "^5.2.11",
+    "rimraf": "^5.0.8",
+    "rollup": "^4.18.1",
+    "vite": "^5.3.3",
     "vitest": "^1.6.0",
     "zod": "^3.23.8"
   },
   "peerDependencies": {
-    "astro": "^2.2.0"
+    "astro": "^2.5.0 || ^3.0.0 || ^4.0.0"
   }
 }

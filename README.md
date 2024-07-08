@@ -38,7 +38,7 @@ export default defineConfig({
 
 ## Usage
 
-Extend the base recipe schema in your content collections [configuration file](https://docs.astro.build/en/guides/content-collections/#defining-collections).
+Extend the base recipe schema as a data collection in your collections [configuration file](https://docs.astro.build/en/guides/content-collections/#defining-collections).
 
 ```ts
 // ./src/content/config.js
@@ -47,6 +47,7 @@ import { defineCollection, z } from "astro:content";
 
 export const collections = {
   recipes: defineCollection({
+    type: "data",
     schema: z.object({
       // Add recipe properties.
       ...recipeSchema,
@@ -86,20 +87,15 @@ const { ingredients, cookwares, metadata, steps, shoppingList } = entry.data;
 
 // But metadata is also top level...
 const title = entry.data.title || entry.slug;
-
-// Use the Content component to render the recipe to HTML in your template.
-const { Content } = await entry.render();
----
-
-<Content />
 ```
 
-See the [demo site](./demo) for an example Astro site using this integration.
+See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an example of an Astro site using this integration.
 
 ## TODO
 
 - [x] Write a readme
-- [ ] Allow renderer component to be customized [#2](https://github.com/kauhat/astro-cooklang-integration/issues/2)
+- [ ] Support content collections
+  - [ ] Allow renderer component to be customized [#2](https://github.com/kauhat/astro-cooklang-integration/issues/2)
 - [ ] Find and display recipe images [#3](https://github.com/kauhat/astro-cooklang-integration/issues/3)
 - [ ] Properly handle conflicting filenames [#5](https://github.com/kauhat/astro-cooklang-integration/issues/5)
 - [ ] Add test fixtures [#4](https://github.com/kauhat/astro-cooklang-integration/issues/4)
@@ -118,5 +114,5 @@ See the [demo site](./demo) for an example Astro site using this integration.
 [npm-version-href]: https://npmjs.com/package/astro-cooklang
 [npm-downloads-src]: https://img.shields.io/npm/dm/astro-cooklang?style=flat-square
 [npm-downloads-href]: https://npmjs.com/package/astro-cooklang
-[github-actions-src]: https://img.shields.io/github/actions/workflow/status/kauhat/astro-cooklang/ci.yml?branch=main&style=flat-square
-[github-actions-href]: https://github.com/kauhat/astro-cooklang/actions?query=workflow%3Aci
+[github-actions-src]: https://img.shields.io/github/actions/workflow/status/kauhat/astro-cooklang-integration/publish.yml?branch=main&style=flat-square
+[github-actions-href]: https://github.com/kauhat/astro-cooklang-integration/actions?query=workflow%3Aci

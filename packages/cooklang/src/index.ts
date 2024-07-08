@@ -1,7 +1,6 @@
 import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
 import type { LoadResult, SourceDescription, TransformResult } from "rollup";
 import z from "zod";
-// import type { AstroComponentFactory } from "astro/dist/runtime/server";
 import type {
   AstroIntegration,
   ContentEntryModule,
@@ -43,6 +42,9 @@ export const recipeSchema = {
 };
 
 //
+// Unoffical Astro API types...
+//
+
 type SetupHookParams = HookParameters<"astro:config:setup"> & {
   // See: https://github.com/withastro/astro/blob/main/packages/integrations/markdoc/src/index.ts#L14
   // "`contentEntryType` is not a public API"
@@ -68,6 +70,10 @@ type EntryInfoOutput = {
 };
 
 const loadedRecipesMap = new Map();
+
+//
+// Cooklang integration...
+//
 
 /**
  * Load recipe from file contents and extract data.
@@ -116,7 +122,7 @@ function getEntryInfo({ fileUrl, contents }: EntryInfoInput): EntryInfoOutput {
     slug: metadata.slug,
     data,
     body: "", // Should we use body or rawData for the recipe source?
-    rawData: "",
+    rawData: contents,
   };
 }
 
@@ -166,7 +172,9 @@ async function getRenderModule({
 import { jsx as h } from "astro/jsx-runtime";
 
 // TODO: How can we load a user given renderer?
-import Renderer from 'astro-cooklang/ContentRenderer.astro';
+import { Renderer } from 'astro-cooklang/components';
+
+console.log({Renderer})
 
 /**
  * Source cooklang file.
@@ -227,6 +235,11 @@ declare module 'astro:content' {
 }`;
 
 /**
+ * Integration settings...
+ */
+export interface AstroCooklangConfig {}
+
+/**
  * Our main Astro integration...
  */
 export default function cooklangIntegration(
@@ -245,6 +258,11 @@ export default function cooklangIntegration(
 
         addPageExtension(".cook");
 
+        addDataEntryType({
+          extensions: [".cook"],
+          getEntryInfo,
+        });
+
         addContentEntryType({
           extensions: [".cook"],
           getEntryInfo,
@@ -253,47 +271,39 @@ export default function cooklangIntegration(
           // handlePropagation: false,
         });
 
-        // addDataEntryType({
-        //   extensions: [".cook"],
-        //   getEntryInfo,
-        //   getRenderModule,
-        //   contentModuleTypes: contentTypesTemplate,
-        //   handlePropagation: true,
+        // updateConfig({
+        //   vite: {
+        //     /** @type {import('vite').Plugin[]} */
+        //     plugins: [
+        //       {
+        //         name: "cooklang-loader",
+        //         enforce: "pre",
+
+        //         transform(source: string, id: string): TransformResult | null {
+        //           // Check the file name contains ".cook" extension.
+        //           if (!id.endsWith(".cook")) {
+        //             return null;
+        //           }
+
+        //           // Resolve the imported path.
+        //           const [path, _query] = id.split("?", 2);
+
+        //           const code = "";
+        //           // const code = sourceToJSONTransform(source, path, true);
+        //           // const code = sourceToRecipeTransform(source, path, true)
+
+        //           //
+        //           return {
+        //             code,
+        //             map: null,
+        //             // deps: ['@cooklang/cooklang-ts'],
+        //             // dynamicDeps: ['@cooklang/cooklang-ts'],
+        //           };
+        //         },
+        //       },
+        //     ],
+        //   },
         // });
-
-        updateConfig({
-          vite: {
-            /** @type {import('vite').Plugin[]} */
-            plugins: [
-              {
-                name: "cooklang-loader",
-                // enforce: 'pre',
-
-                transform(source: string, id: string): TransformResult | null {
-                  // Check the file name contains ".cook" extension.
-                  if (!id.endsWith(".cook")) {
-                    return null;
-                  }
-
-                  // Resolve the imported path.
-                  const [path, _query] = id.split("?", 2);
-
-                  const code = "";
-                  // const code = sourceToJSONTransform(source, path, true);
-                  // const code = sourceToRecipeTransform(source, path, true)
-
-                  //
-                  return {
-                    code,
-                    map: null,
-                    // deps: ['@cooklang/cooklang-ts'],
-                    // dynamicDeps: ['@cooklang/cooklang-ts'],
-                  };
-                },
-              },
-            ],
-          },
-        });
       },
     },
   };

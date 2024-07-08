@@ -1,0 +1,23 @@
+name: "Build & test"
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.11.0
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: devbox run install
+
+      - name: Run Turbo build
+        run: devbox run build

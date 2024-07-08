@@ -1,16 +1,90 @@
-name: "Publish package to NPM"
+name: "Build & deploy demo site"
 
 on:
+  # Runs on pushes targeting the default branch
   push:
-  release:
-    types: [published]
+    branches: [$default-branch]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
+    name: Build package and demo site
     runs-on: ubuntu-latest
+
     steps:
-      - name: Build output
-        uses: ./.github/workflows/basic.yml
-      - run: pnpm publish --dry-run -w ./packages/cooklang
+      - uses: actions/checkout@v4
+
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.11.0
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: devbox run install
+
+      - name: Run Turbo build
+        run: devbox run build
+
+      - name: Upload demo artifacts
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./demo/dist
+
+  # Deploy demo site
+  deploy:
+    name: Deploy demo site
+    runs-on: ubuntu-latest
+
+    # Add a dependency to the build job
+    needs: build
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+  # Publish
+  publish:
+    name: Publish package
+    runs-on: ubuntu-latest
+
+    # Add a dependency to the build job
+    needs: build
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Note: pnpm install after versioning is necessary to refresh lockfile
+          version: pnpm run version
+          publish: pnpm exec changeset publish
+          commit: "[ci] release"
+          title: "[ci] release"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Needs access to push to main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Needs access to publish to npm
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

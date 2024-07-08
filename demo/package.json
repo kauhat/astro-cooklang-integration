@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "serve": "astro preview",
@@ -11,8 +12,12 @@
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",
     "@tailwindcss/typography": "^0.5.13",
-    "astro": "4.8.6",
+    "astro": "4.10.0",
     "astro-cooklang": "workspace:*",
-    "tailwindcss": "^3.4.3"
+    "sharp": "^0.33.4",
+    "tailwindcss": "^3.4.4"
+  },
+  "devDependencies": {
+    "vite-plugin-inspect": "^0.8.4"
   }
 }

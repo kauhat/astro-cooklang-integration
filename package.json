@@ -1,29 +1,22 @@
 {
   "name": "astro-cooklang.root",
   "private": true,
-  "packageManager": "pnpm@7.14.2",
-  "workspaces": [
-    "demo",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@8.15.4",
   "scripts": {
-    "build": "pnpm -C ./packages/cooklang run build",
-    "dev": "pnpm run build -w",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
     "pretty": "prettier -w ./",
-    "release": "pnpm -C ./packages/cooklang publish",
-    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch",
-    "demo:build": "pnpm run build; pnpm -C ./demo run build",
-    "demo:serve": "pnpm -C ./demo run serve",
-    "demo:start": "pnpm -C ./demo run start"
+    "version": "changeset version && pnpm install --no-frozen-lockfile"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "astro": "4.8.6",
-    "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0",
-    "prettier-plugin-tailwindcss": "^0.5.14",
-    "typescript": "^5.4.5"
+    "astro": "4.10.0",
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "turbo": "^2.0.6",
+    "typescript": "^5.5.3"
   }
 }
