@@ -17,4 +17,14 @@ export const collections = {
       //   .default([]),
     }),
   }),
+
+  recipesData: defineCollection({
+    type: 'data',
+    schema: z.object({
+      ...recipeSchema,
+
+      title: z.string().optional(),
+      category: z.string().optional(),
+    }),
+  }),
 };
