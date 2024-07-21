@@ -41,11 +41,11 @@
     "@cooklang/cooklang-ts": "^1.2.6"
   },
   "devDependencies": {
-    "astro": "4.10.0",
+    "astro": "4.12.2",
     "gray-matter": "^4.0.3",
-    "rimraf": "^5.0.8",
-    "rollup": "^4.18.1",
-    "vite": "^5.3.3",
+    "rimraf": "^5.0.9",
+    "rollup": "^4.19.0",
+    "vite": "^5.3.4",
     "vitest": "^1.6.0",
     "zod": "^3.23.8"
   },
