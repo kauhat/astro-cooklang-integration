@@ -40,15 +40,11 @@ const debug = { id, slug, metadata };
   <!-- Main -->
   <div class="prose w-full p-4">
     <Content />
-    <Renderer {...entry.data} />
   </div>
 
   <footer class="mt-auto p-4 text-center">
     <p class="text-neutral-600">
-      <Code
-        code={'import {Renderer} from "astro-cooklang/components"'}
-        lang="ts"
-      />
+      <Code code={"const { Content } = await entry.render();"} lang="ts" />
     </p>
   </footer>
 

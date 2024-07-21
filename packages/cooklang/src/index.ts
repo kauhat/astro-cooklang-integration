@@ -1,6 +1,7 @@
 import { Recipe, getImageURL } from "@cooklang/cooklang-ts";
 import type { LoadResult, SourceDescription, TransformResult } from "rollup";
 import z from "zod";
+import astroJsx from "astro/jsx/renderer.js";
 import type {
   AstroIntegration,
   ContentEntryModule,
@@ -158,8 +159,6 @@ async function getRenderModule({
   // Recipe should be loaded in entry step.
   const recipe = loadedRecipesMap.get(fileUrl.toString());
 
-  // console.log(recipe)
-
   if (!recipe) {
     throw new ReferenceError(`Recipe not loaded "${fileUrl.toString()}"`);
   }
@@ -173,8 +172,6 @@ import { jsx as h } from "astro/jsx-runtime";
 
 // TODO: How can we load a user given renderer?
 import { Renderer } from 'astro-cooklang/components';
-
-console.log({Renderer})
 
 /**
  * Source cooklang file.
@@ -195,7 +192,8 @@ export const {
 /**
  * Use renderer component for file entry's <Content/> display.
  */
-const Content = h(
+export async function Content (props) {
+  return h(
     Renderer,
     {
       raw,
@@ -207,11 +205,10 @@ const Content = h(
       shoppingList,
     }
   );
+}
 
 export default Content
 `;
-
-  console.log({ code });
 
   return {
     code,
@@ -226,7 +223,7 @@ const contentTypesTemplate = `
 declare module 'astro:content' {
   interface Render {
     // TODO: Does this work?
-    '.cook': Promise<import('astro-cooklang').CooklangInstance>;1
+    '.cook': Promise<import('astro-cooklang').CooklangInstance>;
 
     // '.cook': Promise<{
     //   Content(props: Record<string, any>): import('astro-cooklang').CooklangInstance<{}>['Content'];
@@ -254,6 +251,7 @@ export default function cooklangIntegration(
           addPageExtension,
           addDataEntryType,
           updateConfig,
+          addRenderer,
         } = params as SetupHookParams;
 
         addPageExtension(".cook");
@@ -268,42 +266,10 @@ export default function cooklangIntegration(
           getEntryInfo,
           getRenderModule,
           contentModuleTypes: contentTypesTemplate,
-          // handlePropagation: false,
+          handlePropagation: true,
         });
 
-        // updateConfig({
-        //   vite: {
-        //     /** @type {import('vite').Plugin[]} */
-        //     plugins: [
-        //       {
-        //         name: "cooklang-loader",
-        //         enforce: "pre",
-
-        //         transform(source: string, id: string): TransformResult | null {
-        //           // Check the file name contains ".cook" extension.
-        //           if (!id.endsWith(".cook")) {
-        //             return null;
-        //           }
-
-        //           // Resolve the imported path.
-        //           const [path, _query] = id.split("?", 2);
-
-        //           const code = "";
-        //           // const code = sourceToJSONTransform(source, path, true);
-        //           // const code = sourceToRecipeTransform(source, path, true)
-
-        //           //
-        //           return {
-        //             code,
-        //             map: null,
-        //             // deps: ['@cooklang/cooklang-ts'],
-        //             // dynamicDeps: ['@cooklang/cooklang-ts'],
-        //           };
-        //         },
-        //       },
-        //     ],
-        //   },
-        // });
+        addRenderer(astroJsx);
       },
     },
   };
