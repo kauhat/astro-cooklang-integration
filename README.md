@@ -47,7 +47,6 @@ import { defineCollection, z } from "astro:content";
 
 export const collections = {
   recipes: defineCollection({
-    type: "data",
     schema: z.object({
       // Add recipe properties.
       ...recipeSchema,
@@ -95,7 +94,7 @@ See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an e
 ## TODO
 
 - [x] Write a readme
-- [ ] Support content collections
+- [x] Support content collections
   - [ ] Allow renderer component to be customized [#2](https://github.com/kauhat/astro-cooklang-integration/issues/2)
 - [ ] Find and display recipe images [#3](https://github.com/kauhat/astro-cooklang-integration/issues/3)
 - [ ] Properly handle conflicting filenames [#5](https://github.com/kauhat/astro-cooklang-integration/issues/5)
