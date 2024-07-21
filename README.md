@@ -87,6 +87,7 @@ const { ingredients, cookwares, metadata, steps, shoppingList } = entry.data;
 
 // But metadata is also top level...
 const title = entry.data.title || entry.slug;
+---
 ```
 
 See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an example of an Astro site using this integration.
