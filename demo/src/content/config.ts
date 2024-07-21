@@ -18,13 +18,13 @@ export const collections = {
     }),
   }),
 
-  recipesData: defineCollection({
-    type: 'data',
-    schema: z.object({
-      ...recipeSchema,
+  // recipesData: defineCollection({
+  //   type: "data",
+  //   schema: z.object({
+  //     ...recipeSchema,
 
-      title: z.string().optional(),
-      category: z.string().optional(),
-    }),
-  }),
+  //     title: z.string().optional(),
+  //     category: z.string().optional(),
+  //   }),
+  // }),
 };
