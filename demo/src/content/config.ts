@@ -3,7 +3,6 @@ import { defineCollection, z } from "astro:content";
 
 export const collections = {
   recipes: defineCollection({
-    type: "data",
     schema: z.object({
       // Add recipe properties.
       ...recipeSchema,
@@ -18,4 +17,14 @@ export const collections = {
       //   .default([]),
     }),
   }),
+
+  // recipesData: defineCollection({
+  //   type: "data",
+  //   schema: z.object({
+  //     ...recipeSchema,
+
+  //     title: z.string().optional(),
+  //     category: z.string().optional(),
+  //   }),
+  // }),
 };

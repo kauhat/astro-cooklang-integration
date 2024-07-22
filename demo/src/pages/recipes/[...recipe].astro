@@ -11,7 +11,7 @@ export async function getStaticPaths() {
     return {
       params: {
         // e.g `spec/fried-rice`
-        recipe: entry.id,
+        recipe: entry.slug,
       },
       props: { entry },
     };
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { id, slug } = entry;
-// const { Content } = await entry.render();
+const { Content } = await entry.render();
 
 // You can access recipe data like this...
 const { ingredients, metadata } = entry.data;
@@ -39,16 +39,12 @@ const debug = { id, slug, metadata };
 
   <!-- Main -->
   <div class="prose w-full p-4">
-    <!-- <Content /> -->
-    <Renderer {...entry.data} />
+    <Content />
   </div>
 
   <footer class="mt-auto p-4 text-center">
     <p class="text-neutral-600">
-      <Code
-        code={'import {Renderer} from "astro-cooklang/components"'}
-        lang="ts"
-      />
+      <Code code={"const { Content } = await entry.render();"} lang="ts" />
     </p>
   </footer>
 
