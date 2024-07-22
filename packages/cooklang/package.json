@@ -26,16 +26,9 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "coverage": "vitest run --coverage",
-    "clean": "rimraf dist",
-    "prebuild": "npm run clean",
-    "postversion": "git push --follow-tags",
-    "preversion": "npm run build",
     "test": "vitest",
-    "release": "pnpm publish",
-    "bump:major": "pnpm --git-tag-version false version major && pnpm --git-tag-version false version major",
-    "bump:minor": "pnpm --git-tag-version false version minor && pnpm --git-tag-version false version minor",
-    "bump:patch": "pnpm --git-tag-version false version patch && pnpm --git-tag-version false version patch"
+    "coverage": "vitest run --coverage",
+    "clean": "rimraf ./dist"
   },
   "dependencies": {
     "@cooklang/cooklang-ts": "^1.2.6"
