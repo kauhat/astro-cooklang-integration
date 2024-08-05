@@ -1,8 +1,9 @@
 {
   "name": "astro-cooklang",
+  "version": "0.0.1-alpha2",
   "description": "Use Cooklang recipes within Astro",
   "homepage": "https://astro-cooklang.kauh.at/",
-  "version": "0.0.1-alpha2",
+  "repository": "github:kauhat/astro-cooklang-integration",
   "author": "Jack Fletcher",
   "license": "MIT",
   "keywords": [
