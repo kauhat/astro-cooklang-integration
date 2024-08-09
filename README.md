@@ -4,11 +4,11 @@
 
 # Astro Cooklang Integration
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![npm version][npm-version-src]][npm-package]
+[![npm downloads][npm-downloads-src]][npm-package]
 [![Github Actions][github-actions-src]][github-actions-href]
 
-This integration adds support to load `.cook` format files as [content collections](https://docs.astro.build/en/guides/content-collections/).
+This integration adds support to load `.cook` format files as [content collections](https://docs.astro.build/en/guides/content-collections).
 
 ## Setup
 
@@ -58,7 +58,7 @@ export const collections = {
 };
 ```
 
-Recipe entries are loaded using the [Cooklang-TS](https://github.com/cooklang/cooklang-ts) library and have the properties shown below.
+Recipe entries are loaded using the [Cooklang-TS][cooklang-ts-repo] library and have the properties shown below.
 
 ```astro
 ---
@@ -89,9 +89,24 @@ const title = entry.data.title || entry.slug;
 ---
 ```
 
-See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an example of an Astro site using this integration.
+See the [demo site][demo-site] [(source)](./demo) for an example of an Astro site using this integration.
 
-## TODO
+## Development
+
+- [./packages/cooklang/](./packages/cooklang/) - Astro integation package, [published to npm][npm-package]
+- [./demo](./demo/) - Demo site, deployed to [GitHub Pages][demo-site]
+
+This project uses [Turborepo](https://turbo.build/repo/docs) to run tasks in sub-projects. Run scripts from the top-level directory:
+
+```bash
+# Build Astro integration + demo.
+pnpm run build
+
+# Build integration & watch for changes + run demo site in debug mode
+pnpm run dev
+```
+
+### TODO
 
 - [x] Write a readme
 - [x] Support content collections
@@ -100,19 +115,21 @@ See the [demo site](https://astro-cooklang.kauh.at/) [(source)](./demo) for an e
 - [ ] Properly handle conflicting filenames [#5](https://github.com/kauhat/astro-cooklang-integration/issues/5)
 - [ ] Add test fixtures [#4](https://github.com/kauhat/astro-cooklang-integration/issues/4)
 - [ ] Setup deploy action [#6](https://github.com/kauhat/astro-cooklang-integration/issues/6)
-- [ ] Show how to use categories in demo project
+- [x] Show how to use categories in demo project
 - [ ] Show how to use tags in demo project
 
 ## Thanks
 
-- The [Cooklang-TS](https://github.com/cooklang/cooklang-ts) TypeScript library
-- The [Cooklang](https://github.com/cooklang) project and it's contributors
+- The [Cooklang-TS][cooklang-ts-repo] TypeScript library
+- The [Cooklang][cooklang-github-org] project and it's contributors
 
-<!-- Badges -->
-
+[demo-site]: https://astro-cooklang.kauh.at
+[github-repo]: https://github.com/kauhat/astro-cooklang-integration
+[npm-package]: https://npmjs.com/package/astro-cooklang
 [npm-version-src]: https://img.shields.io/npm/v/astro-cooklang?style=flat-square
-[npm-version-href]: https://npmjs.com/package/astro-cooklang
 [npm-downloads-src]: https://img.shields.io/npm/dm/astro-cooklang?style=flat-square
 [npm-downloads-href]: https://npmjs.com/package/astro-cooklang
 [github-actions-src]: https://img.shields.io/github/actions/workflow/status/kauhat/astro-cooklang-integration/publish.yml?branch=main&style=flat-square
 [github-actions-href]: https://github.com/kauhat/astro-cooklang-integration/actions?query=workflow%3Aci
+[cooklang-github-org]: https://github.com/cooklang
+[cooklang-ts-repo]: https://github.com/cooklang/cooklang-ts
