@@ -1,6 +1,6 @@
 {
   "name": "astro-cooklang",
-  "version": "0.0.1-alpha2",
+  "version": "0.0.1",
   "description": "Use Cooklang recipes within Astro",
   "homepage": "https://astro-cooklang.kauh.at/",
   "repository": "github:kauhat/astro-cooklang-integration",
